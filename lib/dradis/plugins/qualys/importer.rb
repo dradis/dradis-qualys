@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module Dradis::Plugins::Qualys
   class Importer < Dradis::Plugins::Upload::Importer
 
