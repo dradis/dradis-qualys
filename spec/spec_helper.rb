@@ -1,7 +1,11 @@
+require 'rubygems'
 require 'bundler/setup'
-Bundler.setup
 
-require 'dradis-qualys'
+require 'combustion'
+
+Combustion.initialize!
+
+require 'rspec/rails'
 
 RSpec.configure do |config|
   # Filter which specs to run
