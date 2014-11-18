@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE SCAN SYSTEM "https://qualysguard.qualys.de/scan-1.dtd">
+<SCAN value="scan/1327124089.959">
+
+<HEADER>
+  <KEY value="USERNAME">dradispro</KEY>
+  <KEY value="COMPANY"><![CDATA[Security Roots]]></KEY>
+  <KEY value="DATE">2011-12-20T12:00:00Z</KEY>
+  <KEY value="TITLE"><![CDATA[Sample_Test_Scan]]></KEY>
+  <KEY value="TARGET">10.0.155.157,10.0.155.160</KEY>
+  <KEY value="DURATION">03:42:36</KEY>
+  <KEY value="SCAN_HOST">62.210.136.186 (Scanner 4.14.30-1,Web 6.0 FR6 [build 6.3.94-1],Vulnsigs 1.22.62-1)</KEY>
+  <KEY value="NBHOST_ALIVE">2</KEY>
+  <KEY value="NBHOST_TOTAL">2</KEY>
+  <KEY value="REPORT_TYPE">Scheduled</KEY>
+  <KEY value="OPTIONS">Full TCP scan, Standard Password Brute Forcing, Load balancer detection OFF, Overall Performance: Custom, Hosts to Scan in Parallel - External Scanners: 1, Hosts to Scan in Parallel - Scanner Appliances: 1, Total Processes to Run in Parallel: 1, HTTP Processes to Run in Parallel: 1, Packet (Burst) Delay: Maximum</KEY>
+  <KEY value="STATUS">FINISHED</KEY>
+  <OPTION_PROFILE>
+    <OPTION_PROFILE_TITLE option_profile_default="0"><![CDATA[Payment Card Industry (PCI) Options]]></OPTION_PROFILE_TITLE>
+  </OPTION_PROFILE>
+</HEADER>
+
+<IP value="10.0.155.160" name="No registered hostname">
+  <OS><![CDATA[Linux 2.4-2.6]]></OS>
+  <VULNS>
+    <CAT value="TCP/IP">
+      <VULN number="82054" severity="2" cveid="CVE-2004-0230">
+        <TITLE><![CDATA[TCP Sequence Number Approximation Based Denial of Service]]></TITLE>
+        <LAST_UPDATE><![CDATA[2007-12-20T22:53:15Z]]></LAST_UPDATE>
+        <CVSS_BASE>5</CVSS_BASE>
+        <CVSS_TEMPORAL>4.2</CVSS_TEMPORAL>
+        <PCI_FLAG>0</PCI_FLAG>
+        <CVE_ID_LIST>
+          <CVE_ID>
+            <ID><![CDATA[CVE-2004-0230]]></ID>
+            <URL><![CDATA[http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0230]]></URL>
+          </CVE_ID>
+        </CVE_ID_LIST>
+        <BUGTRAQ_ID_LIST>
+          <BUGTRAQ_ID>
+            <ID><![CDATA[10183]]></ID>
+            <URL><![CDATA[http://www.securityfocus.com/bid/10183]]></URL>
+          </BUGTRAQ_ID>
+        </BUGTRAQ_ID_LIST>
+        <DIAGNOSIS>
+          <![CDATA[TCP provides stateful communications between hosts on a network. TCP sessions are established by a three-way handshake and use random 32-bit sequence and acknowledgement numbers to ensure the validity of traffic. A vulnerability was reported that may permit TCP sequence numbers to be more easily approximated by remote attackers. This issue affects products released by multiple vendors.
+          <P>
+          The cause of the vulnerability is that affected implementations will accept TCP sequence numbers within a certain range, known as the acknowledgement range, of the expected sequence number for a packet in the session. This is determined by the TCP window size, which is negotiated during the three-way handshake for the session. Larger TCP window sizes may be set to allow for more throughput, but the larger the TCP window size, the more probable it is to guess a TCP sequence number that falls within an acceptable range. It was initially thought that guessing an acceptable sequence number was relatively difficult for most implementations given random distribution, making this type of attack impractical. However, some implementations may make it easier to successfully approximate an acceptable TCP sequence number, making these attacks possible with a number of protocols and implementations.
+          <P>
+          This is further compounded by the fact that some implementations may support the use of the TCP Window Scale Option, as described in RFC 1323, to extend the TCP window size to a maximum value of 1 billion.
+          <P>
+          This vulnerability will permit a remote attacker to inject a SYN or RST packet into the session, causing it to be reset and effectively allowing for denial of service attacks. An attacker would exploit this issue by sending a packet to a receiving implementation with an approximated sequence number and a forged source IP address and TCP port.
+          <P>
+          There are a few factors that may present viable target implementations, such as those which depend on long-lived TCP connections, those that have known or easily guessed IP address endpoints and those implementations with easily guessed TCP source ports. It has been noted that Border Gateway Protocol (BGP) is reported to be particularly vulnerable to this type of attack, due to the use of long-lived TCP sessions and the possibility that some implementations may use the TCP Window Scale Option. As a result, this issue is likely to affect a number of routing platforms.
+          <P>
+          Another factor to consider is the relative difficulty of injecting packets into TCP sessions, as a number of receiving implementations will reassemble packets in order, dropping any duplicates. This may make some implementations more resistant to attacks than others.
+          <P>
+          It should be noted that while a number of vendors have confirmed this issue in various products, investigations are ongoing and it is likely that many other vendors and products will turn out to be vulnerable as the issue is investigated further.]]>
+        </DIAGNOSIS>
+        <CONSEQUENCE><![CDATA[Successful exploitation of this issue could lead to denial of service attacks on the TCP based services of target hosts. Other consequences may also result, such as man-in-the-middle attacks.]]></CONSEQUENCE>
+        <SOLUTION>
+          <![CDATA[Please first check the results section below for the port number on which this vulnerability was detected. If that port number is known to be used for port-forwarding, then it is the backend host that is really vulnerable.
+          <P>
+          Various implementations and products including Check Point, Cisco, Cray Inc, Hitachi, Internet Initiative Japan, Inc (IIJ), Juniper Networks, NEC, Polycom, and Yamaha are currently undergoing review. Contact the vendors to obtain more information about affected products and fixes. <A HREF="http://packetstormsecurity.org/0404-advisories/246929.html" TARGET="_blank">NISCC Advisory 236929 - Vulnerability Issues in TCP</A> details the vendor patch status as of the time of the advisory, and identifies resolutions and workarounds.
+          <P>
+          The Internet Engineering Task Force (IETF) has developed an Internet-Draft titled <A HREF="http://www3.ietf.org/proceedings/05mar/slides/tcpm-4.pdf" TARGET="_blank">Transmission Control Protocol Security Considerations</A> that addresses this issue.
+          <P>
+          Workaround:
+          <P>
+          The following BGP-specific workaround information has been provided.
+          <P>
+          For BGP implementations that support it, the TCP MD5 Signature Option should be enabled. Passwords that the MD5 checksum is applied to should be set to strong values and changed on a regular basis.
+          <P>
+          Secure BGP configuration instructions have been provided for Cisco and Juniper at these locations:
+          <BR>
+          <A HREF="http://www.cymru.com/Documents/secure-bgp-template.html" TARGET="_blank">http://www.cymru.com/Documents/secure-bgp-template.html</A>
+          <BR>
+          <A HREF="http://www.qorbit.net/documents/junos-bgp-template.pdf" TARGET="_blank">http://www.qorbit.net/documents/junos-bgp-template.pdf</A>
+          ]]>
+        </SOLUTION>
+        <!--
+        This is the real test. We want to make sure the parse doesn't cry if this is missing.
+        <RESULT><![CDATA[Tested on port 80 with an injected SYN/RST offset by 16 bytes.]]></RESULT>
+        -->
+      </VULN>
+    </CAT>
+  </VULNS>
+</IP>
+</SCAN>
+<!-- CONFIDENTIAL AND PROPRIETARY INFORMATION. Qualys provides the QualysGuard Service "As Is," without any warranty of any kind. Qualys makes no warranty that the information contained in this report is complete or error-free. Copyright 2008, Qualys, Inc. //-->

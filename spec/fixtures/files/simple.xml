@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE SCAN SYSTEM "https://qualysguard.qualys.de/scan-1.dtd">
+<SCAN value="scan/1327124089.959">
+
+<HEADER>
+  <KEY value="USERNAME">dradispro</KEY>
+  <KEY value="COMPANY"><![CDATA[Security Roots]]></KEY>
+  <KEY value="DATE">2011-12-20T12:00:00Z</KEY>
+  <KEY value="TITLE"><![CDATA[Sample_Test_Scan]]></KEY>
+  <KEY value="TARGET">10.0.155.157,10.0.155.160</KEY>
+  <KEY value="DURATION">03:42:36</KEY>
+  <KEY value="SCAN_HOST">62.210.136.186 (Scanner 4.14.30-1,Web 6.0 FR6 [build 6.3.94-1],Vulnsigs 1.22.62-1)</KEY>
+  <KEY value="NBHOST_ALIVE">2</KEY>
+  <KEY value="NBHOST_TOTAL">2</KEY>
+  <KEY value="REPORT_TYPE">Scheduled</KEY>
+  <KEY value="OPTIONS">Full TCP scan, Standard Password Brute Forcing, Load balancer detection OFF, Overall Performance: Custom, Hosts to Scan in Parallel - External Scanners: 1, Hosts to Scan in Parallel - Scanner Appliances: 1, Total Processes to Run in Parallel: 1, HTTP Processes to Run in Parallel: 1, Packet (Burst) Delay: Maximum</KEY>
+  <KEY value="STATUS">FINISHED</KEY>
+  <OPTION_PROFILE>
+    <OPTION_PROFILE_TITLE option_profile_default="0"><![CDATA[Payment Card Industry (PCI) Options]]></OPTION_PROFILE_TITLE>
+  </OPTION_PROFILE>
+</HEADER>
+
+<IP value="10.0.155.160" name="No registered hostname">
+  <OS><![CDATA[Linux 2.4-2.6]]></OS>
+  <INFOS>
+    <CAT value="Information gathering">
+      <INFO number="6" severity="1">
+        <TITLE><![CDATA[DNS Host Name]]></TITLE>
+        <LAST_UPDATE><![CDATA[1997-12-31T09:01:00Z]]></LAST_UPDATE>
+        <PCI_FLAG>0</PCI_FLAG>
+        <DIAGNOSIS><![CDATA[The fully qualified domain name of this host, if it was obtained from a DNS server, is displayed in the RESULT section.]]></DIAGNOSIS>
+        <RESULT format="table"><![CDATA[IP address	Host name
+10.0.155.160	No registered hostname]]></RESULT>
+      </INFO>
+      <INFO number="45038" severity="1">
+        <TITLE><![CDATA[Host Scan Time]]></TITLE>
+        <LAST_UPDATE><![CDATA[2004-11-19T02:46:12Z]]></LAST_UPDATE>
+        <PCI_FLAG>0</PCI_FLAG>
+        <DIAGNOSIS>
+          <![CDATA[The Host Scan Time is the period of time it takes the scanning engine to perform the vulnerability assessment of a single target host. The Host Scan Time for this host is reported in the Result section below.
+          <P>
+          The Host Scan Time does not have a direct correlation to the Duration time as displayed in the Report Summary section of a scan results report. The Duration is the period of time it takes the service to perform a scan task. The Duration includes the time it takes the service to scan all hosts, which may involve parallel scanning. It also includes the time it takes for a scanner appliance to pick up the scan task and transfer the results back to the service's Secure Operating Center. Further, when a scan task is distributed across multiple scanners, the Duration includes the time it takes to perform parallel host scanning on all scanners.]]>
+        </DIAGNOSIS>
+        <CONSEQUENCE><![CDATA[N/A]]></CONSEQUENCE>
+        <SOLUTION><![CDATA[N/A]]></SOLUTION>
+        <RESULT><![CDATA[Scan duration: 5445 seconds
+
+Start time: Fri, Dec 20 2011, 17:38:59 GMT
+
+End time: Fri, Dec 20 2011, 19:09:44 GMT]]></RESULT>
+      </INFO>
+    </CAT>
+  </INFOS>
+  <SERVICES>
+    <CAT value="TCP/IP">
+      <SERVICE number="82023" severity="1">
+        <TITLE><![CDATA[Open TCP Services List]]></TITLE>
+        <PCI_FLAG>0</PCI_FLAG>
+        <DIAGNOSIS><![CDATA[The port scanner enables unauthorized users with the appropriate tools to draw a map of all services on this host that can be accessed from the Internet.  The test was carried out with a "stealth" port scanner so that the server does not log real connections.]]></DIAGNOSIS>
+        <CONSEQUENCE><![CDATA[Unauthorized users can exploit this information to test vulnerabilities in each of the open services.]]></CONSEQUENCE>
+        <SOLUTION><![CDATA[Shut down any unknown or unused service on the list.  If you have difficulty figuring out which service is provided by which process or program, contact your provider's support team.  For more information about commercial and open-source Intrusion Detection Systems available for detecting port scanners of this kind, visit the <A HREF="http://www.cert.org" TARGET="_blank">CERT Web site</A>.]]></SOLUTION>
+        <RESULT format="table"><![CDATA[Port	IANA Assigned Ports/Services	Description	Service Detected	OS On Redirected Port
+80	www	World Wide Web HTTP	http]]></RESULT>
+      </SERVICE>
+    </CAT>
+    <CAT value="Web server" port="80" protocol="tcp">
+      <SERVICE number="86000" severity="1">
+        <TITLE><![CDATA[Web Server Version]]></TITLE>
+        <LAST_UPDATE><![CDATA[1997-12-31T09:01:00Z]]></LAST_UPDATE>
+        <PCI_FLAG>0</PCI_FLAG>
+        <RESULT format="table"><![CDATA[Server Version	Server Banner
+Apache 1.3	Apache]]></RESULT>
+      </SERVICE>
+    </CAT>
+  </SERVICES>
+  <VULNS>
+    <CAT value="TCP/IP">
+      <VULN number="82054" severity="2" cveid="CVE-2004-0230">
+        <TITLE><![CDATA[TCP Sequence Number Approximation Based Denial of Service]]></TITLE>
+        <LAST_UPDATE><![CDATA[2007-12-20T22:53:15Z]]></LAST_UPDATE>
+        <CVSS_BASE>5</CVSS_BASE>
+        <CVSS_TEMPORAL>4.2</CVSS_TEMPORAL>
+        <PCI_FLAG>0</PCI_FLAG>
+        <CVE_ID_LIST>
+          <CVE_ID>
+            <ID><![CDATA[CVE-2004-0230]]></ID>
+            <URL><![CDATA[http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0230]]></URL>
+          </CVE_ID>
+        </CVE_ID_LIST>
+        <BUGTRAQ_ID_LIST>
+          <BUGTRAQ_ID>
+            <ID><![CDATA[10183]]></ID>
+            <URL><![CDATA[http://www.securityfocus.com/bid/10183]]></URL>
+          </BUGTRAQ_ID>
+        </BUGTRAQ_ID_LIST>
+        <DIAGNOSIS>
+          <![CDATA[TCP provides stateful communications between hosts on a network. TCP sessions are established by a three-way handshake and use random 32-bit sequence and acknowledgement numbers to ensure the validity of traffic. A vulnerability was reported that may permit TCP sequence numbers to be more easily approximated by remote attackers. This issue affects products released by multiple vendors.
+          <P>
+          The cause of the vulnerability is that affected implementations will accept TCP sequence numbers within a certain range, known as the acknowledgement range, of the expected sequence number for a packet in the session. This is determined by the TCP window size, which is negotiated during the three-way handshake for the session. Larger TCP window sizes may be set to allow for more throughput, but the larger the TCP window size, the more probable it is to guess a TCP sequence number that falls within an acceptable range. It was initially thought that guessing an acceptable sequence number was relatively difficult for most implementations given random distribution, making this type of attack impractical. However, some implementations may make it easier to successfully approximate an acceptable TCP sequence number, making these attacks possible with a number of protocols and implementations.
+          <P>
+          This is further compounded by the fact that some implementations may support the use of the TCP Window Scale Option, as described in RFC 1323, to extend the TCP window size to a maximum value of 1 billion.
+          <P>
+          This vulnerability will permit a remote attacker to inject a SYN or RST packet into the session, causing it to be reset and effectively allowing for denial of service attacks. An attacker would exploit this issue by sending a packet to a receiving implementation with an approximated sequence number and a forged source IP address and TCP port.
+          <P>
+          There are a few factors that may present viable target implementations, such as those which depend on long-lived TCP connections, those that have known or easily guessed IP address endpoints and those implementations with easily guessed TCP source ports. It has been noted that Border Gateway Protocol (BGP) is reported to be particularly vulnerable to this type of attack, due to the use of long-lived TCP sessions and the possibility that some implementations may use the TCP Window Scale Option. As a result, this issue is likely to affect a number of routing platforms.
+          <P>
+          Another factor to consider is the relative difficulty of injecting packets into TCP sessions, as a number of receiving implementations will reassemble packets in order, dropping any duplicates. This may make some implementations more resistant to attacks than others.
+          <P>
+          It should be noted that while a number of vendors have confirmed this issue in various products, investigations are ongoing and it is likely that many other vendors and products will turn out to be vulnerable as the issue is investigated further.]]>
+        </DIAGNOSIS>
+        <CONSEQUENCE><![CDATA[Successful exploitation of this issue could lead to denial of service attacks on the TCP based services of target hosts. Other consequences may also result, such as man-in-the-middle attacks.]]></CONSEQUENCE>
+        <SOLUTION>
+          <![CDATA[Please first check the results section below for the port number on which this vulnerability was detected. If that port number is known to be used for port-forwarding, then it is the backend host that is really vulnerable.
+          <P>
+          Various implementations and products including Check Point, Cisco, Cray Inc, Hitachi, Internet Initiative Japan, Inc (IIJ), Juniper Networks, NEC, Polycom, and Yamaha are currently undergoing review. Contact the vendors to obtain more information about affected products and fixes. <A HREF="http://packetstormsecurity.org/0404-advisories/246929.html" TARGET="_blank">NISCC Advisory 236929 - Vulnerability Issues in TCP</A> details the vendor patch status as of the time of the advisory, and identifies resolutions and workarounds.
+          <P>
+          The Internet Engineering Task Force (IETF) has developed an Internet-Draft titled <A HREF="http://www3.ietf.org/proceedings/05mar/slides/tcpm-4.pdf" TARGET="_blank">Transmission Control Protocol Security Considerations</A> that addresses this issue.
+          <P>
+          Workaround:
+          <P>
+          The following BGP-specific workaround information has been provided.
+          <P>
+          For BGP implementations that support it, the TCP MD5 Signature Option should be enabled. Passwords that the MD5 checksum is applied to should be set to strong values and changed on a regular basis.
+          <P>
+          Secure BGP configuration instructions have been provided for Cisco and Juniper at these locations:
+          <BR>
+          <A HREF="http://www.cymru.com/Documents/secure-bgp-template.html" TARGET="_blank">http://www.cymru.com/Documents/secure-bgp-template.html</A>
+          <BR>
+          <A HREF="http://www.qorbit.net/documents/junos-bgp-template.pdf" TARGET="_blank">http://www.qorbit.net/documents/junos-bgp-template.pdf</A>
+          ]]>
+        </SOLUTION>
+        <RESULT><![CDATA[Tested on port 80 with an injected SYN/RST offset by 16 bytes.]]></RESULT>
+      </VULN>
+    </CAT>
+    <CAT value="Web server" port="80" protocol="tcp">
+      <VULN number="86821" severity="3" cveid="CVE-2006-3918">
+        <TITLE><![CDATA[Apache 1.3 HTTP Server Expect Header Cross-Site Scripting]]></TITLE>
+        <LAST_UPDATE><![CDATA[2008-09-25T22:26:09Z]]></LAST_UPDATE>
+        <CVSS_BASE source="service">4.3</CVSS_BASE>
+        <CVSS_TEMPORAL>3.4</CVSS_TEMPORAL>
+        <PCI_FLAG>1</PCI_FLAG>
+        <VENDOR_REFERENCE_LIST>
+          <VENDOR_REFERENCE>
+            <ID><![CDATA[Apache 1.3]]></ID>
+            <URL><![CDATA[http://httpd.apache.org/security/vulnerabilities_13.html]]></URL>
+          </VENDOR_REFERENCE>
+        </VENDOR_REFERENCE_LIST>
+        <CVE_ID_LIST>
+          <CVE_ID>
+            <ID><![CDATA[CVE-2006-3918]]></ID>
+            <URL><![CDATA[http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-3918]]></URL>
+          </CVE_ID>
+        </CVE_ID_LIST>
+        <DIAGNOSIS><![CDATA[A vulnerability exists in Apache HTTP Server Versions 1.3.3 to 1.3.34. This issue occurs due to handling of invalid Expect headers.]]></DIAGNOSIS>
+        <CONSEQUENCE><![CDATA[An attacker can exploit this vulnerability to perform a cross-site scripting attack.]]></CONSEQUENCE>
+        <SOLUTION><![CDATA[Upgrade to the latest version of Apache, which is available for download from the <A HREF="http://www.apache.org/" TARGET="_blank">Apache Web site</A>.]]></SOLUTION>
+        <RESULT><![CDATA[HTTP/1.1 417 Expectation Failed
+Date: Fri, 20 Dec 2011 19:05:57 GMT
+Server: Apache
+Keep-Alive: timeout=15, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=iso-8859-1
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;TITLE&gt;417 Expectation Failed&lt;/TITLE&gt;
+&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;Expectation Failed&lt;/H1&gt;
+The expectation given in the Expect request-header
+field could not be met by this server.&lt;P&gt;
+The client sent&lt;PRE&gt;
+Expect: &lt;script&gt;alert(document.domain)&lt;/script&gt;
+&lt;/PRE&gt;
+but we only allow the 100-continue expectation.
+&lt;/BODY&gt;&lt;/HTML&gt;
+-CR-]]></RESULT>
+      </VULN>
+      <VULN number="86477" severity="1">
+        <TITLE><![CDATA[Apache Web Server ETag Header Information Disclosure Weakness]]></TITLE>
+        <LAST_UPDATE><![CDATA[2007-10-18T18:42:10Z]]></LAST_UPDATE>
+        <CVSS_BASE source="service">4.3</CVSS_BASE>
+        <CVSS_TEMPORAL>3.5</CVSS_TEMPORAL>
+        <PCI_FLAG>0</PCI_FLAG>
+        <BUGTRAQ_ID_LIST>
+          <BUGTRAQ_ID>
+            <ID><![CDATA[6939]]></ID>
+            <URL><![CDATA[http://www.securityfocus.com/bid/6939]]></URL>
+          </BUGTRAQ_ID>
+        </BUGTRAQ_ID_LIST>
+        <DIAGNOSIS>
+          <![CDATA[The Apache HTTP Server is a popular, open-source HTTP server for multiple platforms, including Windows, Unix, and Linux.
+          <P>
+          A cache management feature for Apache makes use of an entity tag (ETag) header. When this option is enabled and a request is made for a document relating to a file, an ETag response header is returned containing various file attributes for caching purposes. ETag information allows subsequent file requests to contain specific information, such as the file's inode number.
+          <P>
+          A weakness has been found in the generation of ETag headers under certain configurations implementing the FileETag directive. Among the file attributes included in the header is the file inode number that is returned to a client. In Apache Versions 1.3.22 and earlier, it's not possible to disable inodes in in ETag headers. In later versions, the default behavior is to release this sensitive information.]]>
+        </DIAGNOSIS>
+        <CONSEQUENCE><![CDATA[This vulnerability poses a security risk, as the disclosure of inode information may aid in launching attacks against other network-based services. For instance, NFS uses inode numbers to generate file handles.]]></CONSEQUENCE>
+        <SOLUTION>
+          <![CDATA[OpenBSD has released a <A HREF="ftp://ftp.openbsd.org/pub/OpenBSD/patches/3.2/common/008_httpd.patch" TARGET="_blank">patch</A> that fixes this vulnerability. After installing the patch, inode numbers returned from the server are encoded using a private hash to avoid the release of sensitive information.
+          <P>
+          Customers are advised to upgrade to the latest version of Apache. In Apache Version <A HREF="http://httpd.apache.org/docs/1.3/mod/core.html#fileetag" TARGET="_blank">1.3.23</A> and later, it's possible to configure the FileETag directive to generate ETag headers without inode information.
+          To do so, include &quot;FileETag -INode&quot; in the Apache server configuration file for a specific subdirectory.<P>
+          In order to fix this vulnerability globally, for the Web server, use the option &quot;FileETag None&quot;. Use the option &quot;FileETag
+          MTime Size&quot; if you just want to remove the Inode information.
+          ]]>
+        </SOLUTION>
+        <RESULT><![CDATA[&quot;3bee-4f12-00794aef&quot;]]></RESULT>
+      </VULN>
+    </CAT>
+  </VULNS>
+</IP>
+</SCAN>
+<!-- CONFIDENTIAL AND PROPRIETARY INFORMATION. Qualys provides the QualysGuard Service "As Is," without any warranty of any kind. Qualys makes no warranty that the information contained in this report is complete or error-free. Copyright 2008, Qualys, Inc. //-->
