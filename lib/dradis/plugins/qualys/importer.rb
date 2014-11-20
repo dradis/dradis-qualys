@@ -3,7 +3,7 @@ require 'nokogiri'
 module Dradis::Plugins::Qualys
   class Importer < Dradis::Plugins::Upload::Importer
 
-    attr_accessor :host_node, :issues
+    attr_accessor :host_node
 
     # The framework will call this function if the user selects this plugin from
     # the dropdown list and uploads a file.
@@ -36,14 +36,13 @@ module Dradis::Plugins::Qualys
       logger.info{ "Host: %s" % host_ip }
 
       self.host_node = content_service.create_node(label: host_ip, type: :host)
+
       host_text = "#[Title]#\nBasic host info\n\n#[Description]#\nIP: #{ host_ip }\nName: #{ xml_host['name'] }\n"
       if (xml_os = xml_host.xpath('OS')) && xml_os.any?
         host_text << "OS: #{ xml_os.text }"
       end
-
       content_service.create_note text: host_text, node: self.host_node
 
-      category_node = nil
       # We'll deal with 'VULNS' separately
       ['INFOS', 'SERVICES', 'PRACTICES'].each do |collection|
         xml_host.xpath(collection).each do |xml_collection|
@@ -61,6 +60,7 @@ module Dradis::Plugins::Qualys
     def process_collection(collection, xml_collection)
       collection_node = nil
       xml_cats = xml_collection.xpath('CAT')
+
       xml_cats.each do |xml_cat|
         logger.info{ "\t#{ collection } - #{ xml_cat['value'] }" }
 
@@ -74,7 +74,7 @@ module Dradis::Plugins::Qualys
             label: collection.downcase,
             type: :default,
             parent: self.host_node)
-          collection_node ||= content_service.create_node(
+          category_node = content_service.create_node(
             label: xml_cat['value'],
             type: :default,
             parent: collection_node)
@@ -82,8 +82,8 @@ module Dradis::Plugins::Qualys
 
         # For each INFOS/CAT/INFO, SERVICES/CAT/SERVICE, etc.
         xml_cat.xpath(collection.chop).each do |xml_element|
-
           note_content = template_service.process_template(template: 'element', data: xml_element)
+
           # retrieve hosts affected by this issue (injected in step 2)
           note_content << "\n#[host]#\n"
           note_content << self.host_node.label
@@ -95,17 +95,16 @@ module Dradis::Plugins::Qualys
     end
 
     def process_vuln(xml_vuln)
-      issues ||= content_service.all_issues_by_field('Number')
       vuln_number = xml_vuln[:number]
-      if !issues.key?(vuln_number)
-        logger.info{ "\t\t\t => Creating new issue (plugin_id: #{ plugin_id })" }
-        issue_text = process_entry('element', xml_vuln)
-        issue_text << "\n\n#[Number]#\n#{ vuln_number }\n\n"
-        issues[vuln_number] = content_service.create_issue(text: issue_text, id: vuln_number)
-      end
-      # Create evidence for this host and issue
+
+      logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
+      issue_text = template_service.process_template(template: 'element', data: xml_vuln)
+      issue_text << "\n\n#[Number]#\n#{ vuln_number }\n\n"
+      issues = content_service.create_issue(text: issue_text, id: vuln_number)
+
+      logger.info{ "\t\t => Creating new evidence" }
       evidence_content = template_service.process_template(template: 'evidence', data: xml_vuln)
-      content_service.create_evidence(issue: issues[vuln_number], node: self.host_node, content: evidence_content)
+      content_service.create_evidence(issue: issue, node: self.host_node, content: evidence_content)
     end
   end
 end
