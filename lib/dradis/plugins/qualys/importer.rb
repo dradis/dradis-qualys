@@ -9,7 +9,7 @@ module Dradis::Plugins::Qualys
     # the dropdown list and uploads a file.
     # @returns true if the operation was successful, false otherwise
     def import(params={})
-      file_content    = File.read( params[:file] )
+      file_content = File.read( params[:file] )
 
       logger.info{'Parsing Qualys output file...'}
       @doc = Nokogiri::XML( file_content )
@@ -100,7 +100,7 @@ module Dradis::Plugins::Qualys
       logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
       issue_text = template_service.process_template(template: 'element', data: xml_vuln)
       issue_text << "\n\n#[Number]#\n#{ vuln_number }\n\n"
-      issues = content_service.create_issue(text: issue_text, id: vuln_number)
+      issue = content_service.create_issue(text: issue_text, id: vuln_number)
 
       logger.info{ "\t\t => Creating new evidence" }
       evidence_content = template_service.process_template(template: 'evidence', data: xml_vuln)
