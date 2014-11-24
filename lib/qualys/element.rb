@@ -29,6 +29,13 @@ module Qualys
       ]
     end
 
+    # This allows external callers (and specs) to check for implemented
+    # properties
+    def respond_to?(method, include_private=false)
+      return true if supported_tags.include?(method.to_sym)
+      super
+    end
+
     # This method is invoked by Ruby when a method that is not defined in this
     # instance is called.
     #
@@ -36,7 +43,6 @@ module Qualys
     # attribute, simple descendent or collection that it maps to in the XML
     # tree.
     def method_missing(method, *args)
-
       # We could remove this check and return nil for any non-recognized tag.
       # The problem would be that it would make tricky to debug problems with
       # typos. For instance: <>.potr would return nil instead of raising an

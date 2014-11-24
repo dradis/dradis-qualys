@@ -4,5 +4,5 @@ require 'dradis/plugins'
 # Load this add-on's engine
 require 'dradis/plugins/qualys'
 
-# load supporting Acunetix classes
+# load supporting Qualys classes
 require 'qualys/element'
