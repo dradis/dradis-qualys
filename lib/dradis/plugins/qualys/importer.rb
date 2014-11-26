@@ -27,7 +27,7 @@ module Dradis::Plugins::Qualys
       end
 
       return true
-    end # /import
+    end
 
     private
 
@@ -84,7 +84,7 @@ module Dradis::Plugins::Qualys
         xml_cat.xpath(collection.chop).each do |xml_element|
           note_content = template_service.process_template(template: 'element', data: xml_element)
 
-          # retrieve hosts affected by this issue (injected in step 2)
+          # retrieve hosts affected by this issue
           note_content << "\n#[host]#\n"
           note_content << self.host_node.label
           note_content << "\n\n"

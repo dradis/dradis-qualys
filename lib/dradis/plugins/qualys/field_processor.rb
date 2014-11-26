@@ -10,14 +10,14 @@ module Dradis
         def value(args={})
           field = args[:field]
 
-          # fields in the template are of the form <foo>.<field>, where <foo>
+          # Fields in the template are of the form <foo>.<field>, where <foo>
           # is common across all fields for a given template (and meaningless).
           _, name = field.split('.')
 
           if name.end_with?('entries')
-            # report_item.bid_entries
-            # report_item.cve_entries
-            # report_item.xref_entries
+            # qualys_object.bid_entries
+            # qualys_object.cve_entries
+            # qualys_object.xref_entries
             entries = @qualys_object.try(name)
             if entries.any?
               entries.to_a.join("\n")

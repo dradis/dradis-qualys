@@ -10,7 +10,7 @@ describe 'Qualys upload plugin' do
   describe "Importer" do
     before(:each) do
       # Stub template service
-      templates_dir = File.dirname(__FILE__) + "/../templates"
+      templates_dir = File.expand_path('../../templates', __FILE__)
       expect_any_instance_of(Dradis::Plugins::TemplateService)
       .to receive(:default_templates_dir).and_return(templates_dir)
 
@@ -84,7 +84,6 @@ describe 'Qualys upload plugin' do
         expect(args[:text]).to include("Sequence Number Approximation Based Denial of Service")
         OpenStruct.new(args)
       end.once
-      # debugger
       expect(@content_service).to receive(:create_evidence) do |args|
         expect(args[:content]).to include("Tested on port 80 with an injected SYN/RST offset by 16 bytes.")
         expect(args[:issue].text).to include("Sequence Number Approximation Based Denial of Service")
@@ -112,7 +111,7 @@ describe 'Qualys upload plugin' do
       end.once
 
       # Run the import
-      @importer.import(:file => 'spec/fixtures/files/simple.xml')
+      @importer.import(file: 'spec/fixtures/files/simple.xml')
     end
 
     # A VULN is not required to have a RESULT element.
@@ -136,11 +135,7 @@ describe 'Qualys upload plugin' do
         expect(args[:node].label).to eq("10.0.155.160")
       end.once
 
-      # Evidence.first.content.should include('n/a')
-
-      # host = Node.find_by_label('10.0.155.160')
-      # host.evidence.count.should eq(1)
-      # host.evidence.first.issue.should eq(issue)
+      # Run the import
       @importer.import(file: 'spec/fixtures/files/no_result.xml')
     end
 

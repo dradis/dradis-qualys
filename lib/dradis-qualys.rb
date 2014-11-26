@@ -1,8 +1,8 @@
-# hook to the framework base clases
-require 'dradis/plugins'
+# Hook to the framework base clases
+require 'dradis-plugins'
 
 # Load this add-on's engine
 require 'dradis/plugins/qualys'
 
-# load supporting Qualys classes
+# Load supporting Qualys classes
 require 'qualys/element'
