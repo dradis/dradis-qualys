@@ -11,4 +11,3 @@ module Dradis
     end
   end
 end
-
