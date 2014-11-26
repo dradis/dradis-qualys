@@ -1,6 +1,6 @@
 # Qualys plugin for Dradis
 
-[![Build Status](https://secure.travis-ci.org/dradis/dradis-qualys.png?branch=master)](http://travis-ci.org/dradis/dradis-qualys)
+[![Build Status](https://secure.travis-ci.org/dradis/dradis-qualys.png?branch=master)](http://travis-ci.org/dradis/dradis-qualys) [![Code Climate](https://codeclimate.com/github/dradis/dradis-qualys.png)](https://codeclimate.com/github/dradis/dradis-qualys.png)
 
 Upload Qualys files into Dradis.
 
