@@ -59,13 +59,16 @@ module Dradis::Plugins::Qualys
       logger.info{ "Extracting VULNS" }
 
       xml_host.xpath('VULNS/CAT').each do |xml_cat|
+
+        empty_dup_xml_cat = xml_cat.dup
+        empty_dup_xml_cat.children.remove
+
         xml_cat.xpath('VULN').each do |xml_vuln|
           vuln_number = xml_vuln[:number]
 
           # We need to clear any siblings before or after this VULN
-          dup_xml_cat = xml_cat.dup
-          dup_xml_cat.xpath("VULN[@number=#{vuln_number}]").xpath('preceding-sibling::*').remove
-          dup_xml_cat.xpath("VULN[@number=#{vuln_number}]").xpath('following-sibling::*').remove
+          dup_xml_cat = empty_dup_xml_cat.dup
+          dup_xml_cat.add_child(xml_vuln.dup)
 
           process_vuln(vuln_number, dup_xml_cat)
         end
