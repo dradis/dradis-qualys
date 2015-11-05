@@ -49,9 +49,26 @@ module Dradis::Plugins::Qualys
       end
 
       # Now we focus on 'VULNS' which we convert into Issue/Evidence
+      #
+      # For each <VULN> we need a reference to the parent <CAT> object for
+      # information such as port or protocol.
+      #
+      # Before we hand this to the template_service we need to make sure that
+      # a single VULN is hanging from the parent. To avoid messing the
+      # original document structure we just dup it.
       logger.info{ "Extracting VULNS" }
-      xml_host.xpath('VULNS/CAT/VULN').each do |xml_vuln|
-        process_vuln(xml_vuln)
+
+      xml_host.xpath('VULNS/CAT').each do |xml_cat|
+        xml_cat.xpath('VULN').each do |xml_vuln|
+          vuln_number = xml_vuln[:number]
+
+          # We need to clear any siblings before or after this VULN
+          dup_xml_cat = xml_cat.dup
+          dup_xml_cat.xpath("VULN[@number=#{vuln_number}]").xpath('preceding-sibling::*').remove
+          dup_xml_cat.xpath("VULN[@number=#{vuln_number}]").xpath('following-sibling::*').remove
+
+          process_vuln(vuln_number, dup_xml_cat)
+        end
       end
     end
 
@@ -92,16 +109,16 @@ module Dradis::Plugins::Qualys
       end
     end
 
-    def process_vuln(xml_vuln)
-      vuln_number = xml_vuln[:number]
-
+    # Takes a <CAT> element containing a single <VULN> element and processes an
+    # Issue and Evidence template out of it.
+    def process_vuln(vuln_number, xml_cat)
       logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
-      issue_text = template_service.process_template(template: 'element', data: xml_vuln)
+      issue_text = template_service.process_template(template: 'element', data: xml_cat)
       issue_text << "\n\n#[Number]#\n#{ vuln_number }\n\n"
       issue = content_service.create_issue(text: issue_text, id: vuln_number)
 
       logger.info{ "\t\t => Creating new evidence" }
-      evidence_content = template_service.process_template(template: 'evidence', data: xml_vuln)
+      evidence_content = template_service.process_template(template: 'evidence', data: xml_cat)
       content_service.create_evidence(issue: issue, node: self.host_node, content: evidence_content)
     end
   end
