@@ -98,9 +98,15 @@ module Dradis::Plugins::Qualys
             parent: collection_node)
         end
 
+        empty_dup_xml_cat = xml_cat.dup
+        empty_dup_xml_cat.children.remove
+
         # For each INFOS/CAT/INFO, SERVICES/CAT/SERVICE, etc.
         xml_cat.xpath(collection.chop).each do |xml_element|
-          note_content = template_service.process_template(template: 'element', data: xml_element)
+          dup_xml_cat = empty_dup_xml_cat.dup
+          dup_xml_cat.add_child(xml_element.dup)
+
+          note_content = template_service.process_template(template: 'element', data: dup_xml_cat)
 
           # retrieve hosts affected by this issue
           note_content << "\n#[host]#\n"
