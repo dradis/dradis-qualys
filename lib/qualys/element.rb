@@ -95,8 +95,8 @@ module Qualys
       result.gsub!(/<p>/i, "\n\n")
       result.gsub!(/<br>/i, "\n")
       result.gsub!(/          /, "")
-      result.gsub!(/<A HREF=\"(.*?)\" TARGET=\"_blank\">(.*?)<\/A>/i) { "\"#{$2.strip}\":#{$1.strip}" }
-      result.gsub!(/<PRE>(.*?)<\/PRE>/m) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
+      result.gsub!(/<a href=\"(.*?)\" target=\"_blank\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+      result.gsub!(/<pre>(.*?)<\/pre>/im) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
       result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
       result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
       result
