@@ -89,13 +89,16 @@ module Qualys
     end
 
     private
-      
+
     def cleanup_html(source)
       result = source.dup
-      result.gsub!(/<P>/, "\n\n")
-      result.gsub!(/<BR>/, "\n")
+      result.gsub!(/<p>/i, "\n\n")
+      result.gsub!(/<br>/i, "\n")
       result.gsub!(/          /, "")
-      result.gsub!(/<A HREF=\"(.*?)\" TARGET=\"_blank\">(.*?)<\/A>/) { "\"#{$2.strip}\":#{$1.strip}" }
+      result.gsub!(/<A HREF=\"(.*?)\" TARGET=\"_blank\">(.*?)<\/A>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+      result.gsub!(/<PRE>(.*?)<\/PRE>/m) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
+      result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
+      result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
       result
     end
 
