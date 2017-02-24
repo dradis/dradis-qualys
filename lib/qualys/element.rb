@@ -67,8 +67,14 @@ module Qualys
 
       # Then we try simple children tags: TITLE, LAST_UPDATE, CVSS_BASE...
       tag = @xml.xpath("./#{method_name.upcase}").first
-      if tag
-        return tag.text
+      if tag && !tag.text.blank?
+        if tags_with_html_content.include?(method)
+          return cleanup_html(tag.text)
+        else
+          return tag.text
+        end
+      else
+        'n/a'
       end
 
       # Finally the enumerations: vendor_reference_list, cve_id_list, bugtraq_id_list
@@ -81,5 +87,24 @@ module Qualys
         return nil
       end
     end
+
+    private
+
+    def cleanup_html(source)
+      result = source.dup
+      result.gsub!(/<p>/i, "\n\n")
+      result.gsub!(/<br>/i, "\n")
+      result.gsub!(/          /, "")
+      result.gsub!(/<a href=\"(.*?)\" target=\"_blank\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+      result.gsub!(/<pre>(.*?)<\/pre>/im) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
+      result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
+      result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
+      result
+    end
+
+    def tags_with_html_content
+      [:diagnosis, :solution]
+    end
+
   end
 end
