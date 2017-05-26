@@ -92,6 +92,10 @@ module Qualys
 
     def cleanup_html(source)
       result = source.dup
+      result.gsub!(/&quot;/, '"')
+      result.gsub!(/&lt;/, '<')
+      result.gsub!(/&gt;/, '>')
+      
       result.gsub!(/<p>/i, "\n\n")
       result.gsub!(/<br>/i, "\n")
       result.gsub!(/          /, "")
