@@ -51,7 +51,6 @@ module Dradis::Plugins::Qualys
     end
 
     def process_collection(collection, xml_collection)
-      collection_node = nil
       xml_cats = xml_collection.xpath('CAT')
 
       xml_cats.each do |xml_cat|
