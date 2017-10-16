@@ -35,11 +35,12 @@ module Dradis::Plugins::Qualys
 
       self.host_node = content_service.create_node(label: host_ip, type: :host)
 
-      host_text = "#[Title]#\nBasic host info\n\n#[Description]#\nIP: #{ host_ip }\nName: #{ xml_host['name'] }\n"
+      host_node.set_property(:ip, host_ip)
+      host_node.set_property(:hostname, xml_host['name'])
       if (xml_os = xml_host.xpath('OS')) && xml_os.any?
-        host_text << "OS: #{ xml_os.text }"
+        host_node.set_property(:os, xml_os.text)
       end
-      content_service.create_note text: host_text, node: self.host_node
+      host_node.save
 
       # We treat INFOS, SERVICES, PRACTICES, and VULNS the same way
       # All of these are imported into Dradis as Issues
