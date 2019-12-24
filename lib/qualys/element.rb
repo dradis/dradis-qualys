@@ -99,15 +99,20 @@ module Qualys
       result.gsub!(/<p>/i, "\n\n")
       result.gsub!(/<br>/i, "\n")
       result.gsub!(/          /, "")
-      result.gsub!(/<a href=\"(.*?)\" target=\"_blank\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+      result.gsub!(/<a href=\"(.*?)\"\s?target=\"_blank\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
       result.gsub!(/<pre>(.*?)<\/pre>/im) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
       result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
+      result.gsub!(/<b>|<\/b>/i, "")
       result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
+
+      result.gsub!(/<dl>|<\/dl>/i, "\n")
+      result.gsub!(/<dt>(.*?)<\/dt>/i) { "* #{$1.strip}" }
+      result.gsub!(/<DD>(.*?)<\/DD>/i) { "** #{$1.strip}" }
       result
     end
 
     def tags_with_html_content
-      [:diagnosis, :solution]
+      [:consequence, :diagnosis, :solution]
     end
 
   end
