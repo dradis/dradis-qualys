@@ -1,4 +1,4 @@
-## Dradis Framework 3.15 (XXXX, 2020) ##
+## Dradis Framework 3.16 (XXXX, 2020) ##
 
 * Update tag parsing to remove formatting tags
 
