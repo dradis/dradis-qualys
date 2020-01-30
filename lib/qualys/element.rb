@@ -107,7 +107,7 @@ module Qualys
 
       result.gsub!(/<dl>|<\/dl>/i, "\n")
       result.gsub!(/<dt>(.*?)<\/dt>/i) { "* #{$1.strip}" }
-      result.gsub!(/<DD>(.*?)<\/DD>/i) { "** #{$1.strip}" }
+      result.gsub!(/<dd>(.*?)<\/dd>/i) { "** #{$1.strip}" }
       result
     end
 
