@@ -86,7 +86,8 @@ module Dradis::Plugins
       )
       
       expect_to_create_issue_with(
-        text: "Apache Web Server ETag Header Information Disclosure Weakness"
+          text: "Apache Web Server ETag Header Information Disclosure Weakness",
+          text: "OpenBSD has released a \"patch\":ftp://ftp.openbsd.org/pub/OpenBSD/patches/3.2/common/008_httpd.patch that fixes this vulnerability. After installing the patch, inode numbers returned from the server are encoded using a private hash to avoid the release of sensitive information.\n\n\n\nCustomers"
       )
       
       run_import!
@@ -143,7 +144,7 @@ module Dradis::Plugins
     context "when an issue has no RESULT element" do
       #let(:example_xml) { 'spec/fixtures/files/no_result.xml' }
 
-      it "detects an issue without a RESULT element and applies (n/a)" do
+      it "detects an issue without a RESULT element and applies (n/a) and strips/replaces formatting tags" do
         # 1 node should be created:
         expect_to_create_node_with(label: '10.0.155.160')
 
@@ -151,7 +152,8 @@ module Dradis::Plugins
         #   - TCP/IP: Sequence number in both hosts
         # Each one should create 1 issue and 1 evidence
         expect_to_create_issue_with(
-          text: "Sequence Number Approximation Based Denial of Service"
+          text: "Sequence Number Approximation Based Denial of Service",
+          text: "Please first check the results section below for the port number on which this vulnerability was detected. If that port number is known to be used for port-forwarding, then it is the backend host that is really vulnerable.\n\n\n\nVarious implementations and products including Check Point, Cisco, Cray Inc, Hitachi, Internet Initiative Japan, Inc (IIJ), Juniper Networks, NEC, Polycom, and Yamaha are currently undergoing review. Contact the vendors to obtain more information about affected products and fixes. \"NISCC Advisory 236929 - Vulnerability Issues in TCP\":http://packetstormsecurity.org/0404-advisories/246929.html details the vendor patch status as of the time of the advisory, and identifies resolutions and workarounds."
         )
 
         expect_to_create_evidence_with(
