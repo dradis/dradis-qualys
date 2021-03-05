@@ -88,6 +88,10 @@ module Qualys
       end
     end
 
+    def category
+      @xml.name&.titleize
+    end
+
     private
 
     def cleanup_html(source)
@@ -95,7 +99,7 @@ module Qualys
       result.gsub!(/&quot;/, '"')
       result.gsub!(/&lt;/, '<')
       result.gsub!(/&gt;/, '>')
-      
+
       result.gsub!(/<p>/i, "\n\n")
       result.gsub!(/<br>/i, "\n")
       result.gsub!(/          /, "")
