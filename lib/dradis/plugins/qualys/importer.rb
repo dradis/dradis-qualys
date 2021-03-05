@@ -67,7 +67,6 @@ module Dradis::Plugins::Qualys
           cat_number = xml_element[:number]
 
           process_vuln(collection, cat_number, dup_xml_cat)
-
         end
       end
     end

@@ -1,3 +1,7 @@
+## Dradis Framework 3.22 (mmm, 2021) ##
+
+*  Add category field for Infos, Services, Practices, and Vulns
+
 ## Dradis Framework 3.21 (February, 2021) ##
 
 *  No changes.
