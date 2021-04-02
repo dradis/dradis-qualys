@@ -1,35 +1,21 @@
 #[Title]#
 %element.title%
 
+#[CVSSv3.BaseScore]#
+%element.cvss_base%
 
-#[Severity]#
-%element.severity%
+#[CVSSv3.Vector]#
+Temporal score: %element.cvss_temporal%
 
+#[Type]#
+External
 
-#[CVE]#
-%element.cveid%
-
-
-#[CVSS]#
-Base: %element.cvss_base%
-Temporal: %element.cvss_temporal%
-
-
-#[Diagnosis]#
+#[Description]#
 %element.diagnosis%
-
-
-#[Consequence]#
 %element.consequence%
-
 
 #[Solution]#
 %element.solution%
 
-
-#[Result]#
-%element.result%
-
-
-#[CVEList]#
-%element.cve_id_list%
+#[References]#
+%element.vendor_reference_list%
