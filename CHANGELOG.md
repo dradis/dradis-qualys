@@ -1,7 +1,7 @@
-## Dradis Framework 4.1 (XXXX, 2021) ##
-
-* Remove orphaned <b> tags
-* Add <dd>, <dt> support
+v4.0.1 ([month], 2021)
+  * Added 'Qualys Collection' as default field
+  * Introduced support for <dd> and <dt>
+  * Removed orphaned <b> tags
 
 ## Dradis Framework 4.0.0 (July, 2021) ##
 
