@@ -33,3 +33,7 @@ Temporal: %element.cvss_temporal%
 
 #[CVEList]#
 %element.cve_id_list%
+
+
+#[Qualys Collection]#
+%element.qualys_collection%
