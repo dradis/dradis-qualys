@@ -66,7 +66,7 @@ module Dradis::Plugins::Qualys
           dup_xml_cat.add_child(xml_element.dup)
           cat_number = xml_element[:number]
 
-          process_vuln(collection, cat_number, dup_xml_cat)
+          process_vuln(cat_number, dup_xml_cat)
 
         end
       end
@@ -74,10 +74,9 @@ module Dradis::Plugins::Qualys
 
     # Takes a <CAT> element containing a single <VULN> element and processes an
     # Issue and Evidence template out of it.
-    def process_vuln(collection, vuln_number, xml_cat)
+    def process_vuln(vuln_number, xml_cat)
       logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
       issue_text = template_service.process_template(template: 'element', data: xml_cat)
-      issue_text << "\n\n#[qualys_collection]#\n#{ collection }"
       issue = content_service.create_issue(text: issue_text, id: vuln_number)
 
       logger.info{ "\t\t => Creating new evidence" }
