@@ -80,12 +80,7 @@ module Qualys
         'n/a'
       end
 
-      # Finally the enumerations: vendor_reference_list, cve_id_list, bugtraq_id_list
-      if method_name == 'references'
-        # @xml.xpath("./references/reference").collect{|entry| {:source => entry['source'], :text => entry.text} }
-      elsif method == 'tags'
-        # @xml.xpath("./tags/tag").collect(&:text)
-      elsif method_name == 'qualys_collection'
+      if method_name == 'qualys_collection'
         @xml.name
       else
         # nothing found, the tag is valid but not present in this ReportItem
