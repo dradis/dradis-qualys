@@ -84,12 +84,12 @@ module Dradis::Plugins
       expect_to_create_issue_with(
         text: "Apache 1.3 HTTP Server Expect Header Cross-Site Scripting"
       )
-      
+
       expect_to_create_issue_with(
           text: "Apache Web Server ETag Header Information Disclosure Weakness",
           text: "OpenBSD has released a \"patch\":ftp://ftp.openbsd.org/pub/OpenBSD/patches/3.2/common/008_httpd.patch that fixes this vulnerability. After installing the patch, inode numbers returned from the server are encoded using a private hash to avoid the release of sensitive information.\n\n\n\nCustomers"
       )
-      
+
       run_import!
     end
 
@@ -166,6 +166,15 @@ module Dradis::Plugins
       end
     end
 
+    context 'VULN with ciphers' do
+      it 'wraps cipher in code block' do
+        expect_to_create_issue_with(
+          text: "\nbc. SSLCipherSuite RC4-SHA:HIGH:!ADH"
+        )
+
+        @importer.import(file: 'spec/fixtures/files/with_ciphers.xml')
+      end
+    end
 
     def expect_to_create_node_with(label:)
       expect(@content_service).to receive(:create_node).with(

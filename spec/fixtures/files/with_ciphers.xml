@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE SCAN SYSTEM "https://qualysguard.qualys.de/scan-1.dtd">
+<SCAN value="scan/1327124089.959">
+
+  <HEADER>
+    <KEY value="USERNAME">dradispro</KEY>
+    <KEY value="COMPANY"><![CDATA[Security Roots]]></KEY>
+    <KEY value="DATE">2011-12-20T12:00:00Z</KEY>
+    <KEY value="TITLE"><![CDATA[Sample_Test_Scan]]></KEY>
+    <KEY value="TARGET">10.0.155.157,10.0.155.160</KEY>
+    <KEY value="DURATION">03:42:36</KEY>
+    <KEY value="SCAN_HOST">62.210.136.186 (Scanner 4.14.30-1,Web 6.0 FR6 [build 6.3.94-1],Vulnsigs 1.22.62-1)</KEY>
+    <KEY value="NBHOST_ALIVE">2</KEY>
+    <KEY value="NBHOST_TOTAL">2</KEY>
+    <KEY value="REPORT_TYPE">Scheduled</KEY>
+    <KEY value="OPTIONS">Full TCP scan, Standard Password Brute Forcing, Load balancer detection OFF, Overall Performance: Custom, Hosts to Scan in Parallel - External Scanners: 1, Hosts to Scan in Parallel - Scanner Appliances: 1, Total Processes to Run in Parallel: 1, HTTP Processes to Run in Parallel: 1, Packet (Burst) Delay: Maximum</KEY>
+    <KEY value="STATUS">FINISHED</KEY>
+    <OPTION_PROFILE>
+      <OPTION_PROFILE_TITLE option_profile_default="0"><![CDATA[Payment Card Industry (PCI) Options]]></OPTION_PROFILE_TITLE>
+    </OPTION_PROFILE>
+  </HEADER>
+
+  <IP value="10.0.155.160" name="No registered hostname">
+    <OS><![CDATA[Linux 2.4-2.6]]></OS>
+    <VULNS>
+      <CAT value="Web server" port="80" protocol="tcp">
+        <VULN number="38140" severity="1">
+          <TITLE><![CDATA[Apache Web Server ETag Header Information Disclosure Weakness]]></TITLE>
+          <LAST_UPDATE><![CDATA[2007-10-18T18:42:10Z]]></LAST_UPDATE>
+          <CVSS_BASE source="service">4.3</CVSS_BASE>
+          <CVSS_TEMPORAL>3.5</CVSS_TEMPORAL>
+          <PCI_FLAG>0</PCI_FLAG>
+          <BUGTRAQ_ID_LIST>
+            <BUGTRAQ_ID>
+              <ID><![CDATA[6939]]></ID>
+              <URL><![CDATA[http://www.securityfocus.com/bid/6939]]></URL>
+            </BUGTRAQ_ID>
+          </BUGTRAQ_ID_LIST>
+          <DIAGNOSIS>
+            <![CDATA[The Apache HTTP Server is a popular, open-source HTTP server for multiple platforms, including Windows, Unix, and Linux.
+          <P>
+          A cache management feature for Apache makes use of an entity tag (ETag) header. When this option is enabled and a request is made for a document relating to a file, an ETag response header is returned containing various file attributes for caching purposes. ETag information allows subsequent file requests to contain specific information, such as the file's inode number.
+          <P>
+          A weakness has been found in the generation of ETag headers under certain configurations implementing the FileETag directive. Among the file attributes included in the header is the file inode number that is returned to a client. In Apache Versions 1.3.22 and earlier, it's not possible to disable inodes in in ETag headers. In later versions, the default behavior is to release this sensitive information.]]>
+          </DIAGNOSIS>
+          <CONSEQUENCE><![CDATA[This vulnerability poses a security risk, as the disclosure of inode information may aid in launching attacks against other network-based services. For instance, NFS uses inode numbers to generate file handles.]]></CONSEQUENCE>
+          <SOLUTION>
+            <![CDATA[OpenBSD has released a <A HREF="ftp://ftp.openbsd.org/pub/OpenBSD/patches/3.2/common/008_httpd.patch" TARGET="_blank">patch</A> that fixes this vulnerability. After installing the patch, inode numbers returned from the server are encoded using a private hash to avoid the release of sensitive information.
+          <P>
+          Customers are advised to upgrade to the latest version of Apache. In Apache Version <A HREF="http://httpd.apache.org/docs/1.3/mod/core.html#fileetag" TARGET="_blank">1.3.23</A> and later, it's possible to configure the FileETag directive to generate ETag headers without inode information.
+          To do so, include &quot;FileETag -INode&quot; in the Apache server configuration file for a specific subdirectory.<P>
+          In order to fix this vulnerability globally, for the Web server, use the option &quot;FileETag None&quot;. Use the option &quot;FileETag
+          MTime Size&quot; if you just want to remove the Inode information.
+          <P>SSLCipherSuite RC4-SHA:HIGH:!ADH<P>
+          ]]>
+          </SOLUTION>
+          <RESULT><![CDATA[&quot;3bee-4f12-00794aef&quot;]]></RESULT>
+        </VULN>
+      </CAT>
+    </VULNS>
+  </IP>
+</SCAN>
+<!-- CONFIDENTIAL AND PROPRIETARY INFORMATION. Qualys provides the QualysGuard Service "As Is," without any warranty of any kind. Qualys makes no warranty that the information contained in this report is complete or error-free. Copyright 2008, Qualys, Inc. //-->

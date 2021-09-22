@@ -1,5 +1,6 @@
 module Dradis::Plugins::Qualys
   class Importer < Dradis::Plugins::Upload::Importer
+    SSL_CIPHER_VULN_IDS = %w[38140 38141 42366].freeze
 
     attr_accessor :host_node
 
@@ -78,11 +79,20 @@ module Dradis::Plugins::Qualys
       logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
       issue_text = template_service.process_template(template: 'element', data: xml_cat)
       issue_text << "\n\n#[qualys_collection]#\n#{ collection }"
+
+      if SSL_CIPHER_VULN_IDS.include?(vuln_number)
+        issue_text = add_bc_to_ssl_cipher_list(issue_text)
+      end
+
       issue = content_service.create_issue(text: issue_text, id: vuln_number)
 
       logger.info{ "\t\t => Creating new evidence" }
       evidence_content = template_service.process_template(template: 'evidence', data: xml_cat)
       content_service.create_evidence(issue: issue, node: self.host_node, content: evidence_content)
+    end
+
+    def add_bc_to_ssl_cipher_list(text)
+      text.gsub(/^(.*?):!(.*?)$/) { "\nbc. #{$1}:!#{$2}\n" }
     end
   end
 end
