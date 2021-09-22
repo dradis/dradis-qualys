@@ -1,6 +1,7 @@
 v4.1.0 ([month] [YYYY])
   - Add <dd>, <dt> support
   - Remove orphaned <b> tags
+  - Wrap ciphers in code blocks
 
 v4.0.0 (July 2021)
   - No changes
