@@ -1,5 +1,6 @@
 module Dradis::Plugins::Qualys
   class Importer < Dradis::Plugins::Upload::Importer
+    # QIDs. The unique Qualys ID number assigned to the vulnerability.
     SSL_CIPHER_VULN_IDS = %w[38140 38141 42366].freeze
 
     attr_accessor :host_node
