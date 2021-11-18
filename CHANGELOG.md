@@ -1,4 +1,4 @@
-v4.1.0 ([month] [YYYY])
+v4.1.0 (November 2021)
   - Add <dd>, <dt> support
   - Remove orphaned <b> tags
 
