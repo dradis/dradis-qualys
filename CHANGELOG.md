@@ -1,3 +1,6 @@
+v4.2.0 (Xxxx 2022)
+  - Add Qualys Web Application Scanner (WAS) support
+
 v4.1.0 (November 2021)
   - Add <dd>, <dt> support
   - Remove orphaned <b> tags
