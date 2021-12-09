@@ -38,7 +38,19 @@ module Dradis::Plugins::Qualys
         logger.info { 'Security Risk: ' + xml_global_summary.at_xpath('./SECURITY_RISK').text }
         logger.info { 'Vulnerabilities found: ' + xml_global_summary.at_xpath('./VULNERABILITY').text }
 
+        doc.xpath('WAS_SCAN_REPORT/GLOSSARY/QID_LIST/QID').each do |xml_qid|
+          process_issue(xml_qid)
+        end
+
         true
+      end
+
+      private
+      def process_issue(xml_qid)
+        qid = xml_qid.at_xpath('QID').text
+        logger.info{ "\t => Creating new issue (plugin_id: #{ qid })" }
+        issue_text = template_service.process_template(template: 'was-issue', data: xml_qid)
+        issue = content_service.create_issue(text: issue_text, id: qid)
       end
     end
   end
