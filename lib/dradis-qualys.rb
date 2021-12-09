@@ -6,3 +6,4 @@ require 'dradis/plugins/qualys'
 
 # Load supporting Qualys classes
 require 'qualys/element'
+require 'qualys/qid'
