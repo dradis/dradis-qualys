@@ -1,4 +1,27 @@
 module Qualys
+
+  def self.cleanup_html(source)
+    result = source.dup
+    result.gsub!(/&quot;/, '"')
+    result.gsub!(/&lt;/, '<')
+    result.gsub!(/&gt;/, '>')
+
+    result.gsub!(/<p>/i, "\n\n")
+    result.gsub!(/<br>/i, "\n")
+    result.gsub!(/          /, "")
+    result.gsub!(/<a href=\"(.*?)\"\s?target=\"_blank\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
+    result.gsub!(/<pre>(.*?)<\/pre>/im) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
+    result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
+    result.gsub!(/<b>|<\/b>/i, "")
+    result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
+
+    result.gsub!(/<dl>|<\/dl>/i, "\n")
+    result.gsub!(/<dt>(.*?)<\/dt>/i) { "* #{$1.strip}" }
+    result.gsub!(/<dd>(.*?)<\/dd>/i) { "** #{$1.strip}" }
+    result
+  end
+
+
   # This class represents each of the /SCAN/IP/[INFOS|SERVICES|VULNS|PRACTICES]/CAT/[INFO|SERVICE|VULN|PRACTICE]
   # elements in the Qualys XML document.
   #
@@ -66,10 +89,10 @@ module Qualys
       return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
 
       # Then we try simple children tags: TITLE, LAST_UPDATE, CVSS_BASE...
-      tag = @xml.xpath("./#{method_name.upcase}").first
+      tag = @xml.at_xpath("./#{method_name.upcase}")
       if tag && !tag.text.blank?
         if tags_with_html_content.include?(method)
-          return cleanup_html(tag.text)
+          return Qualys::cleanup_html(tag.text)
         else
           return tag.text
         end
@@ -89,27 +112,6 @@ module Qualys
     end
 
     private
-
-    def cleanup_html(source)
-      result = source.dup
-      result.gsub!(/&quot;/, '"')
-      result.gsub!(/&lt;/, '<')
-      result.gsub!(/&gt;/, '>')
-      
-      result.gsub!(/<p>/i, "\n\n")
-      result.gsub!(/<br>/i, "\n")
-      result.gsub!(/          /, "")
-      result.gsub!(/<a href=\"(.*?)\"\s?target=\"_blank\">(.*?)<\/a>/i) { "\"#{$2.strip}\":#{$1.strip}" }
-      result.gsub!(/<pre>(.*?)<\/pre>/im) { |m| "\n\nbc.. #{$1.strip}\n\np.  \n" }
-      result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
-      result.gsub!(/<b>|<\/b>/i, "")
-      result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
-
-      result.gsub!(/<dl>|<\/dl>/i, "\n")
-      result.gsub!(/<dt>(.*?)<\/dt>/i) { "* #{$1.strip}" }
-      result.gsub!(/<dd>(.*?)<\/dd>/i) { "** #{$1.strip}" }
-      result
-    end
 
     def tags_with_html_content
       [:consequence, :diagnosis, :solution]
