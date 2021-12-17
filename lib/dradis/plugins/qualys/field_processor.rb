@@ -4,11 +4,14 @@ module Dradis
       class FieldProcessor < Dradis::Plugins::Upload::FieldProcessor
 
         def post_initialize(args={})
-          if data.name == 'CAT'
+          case data.name
+          when 'CAT'
             @cat_object = data
             @qualys_object = ::Qualys::Element.new(data.elements.first)
-          else
+          when 'QID'
             @qualys_object = ::Qualys::QID.new(data)
+          when 'VULNERABILITY'
+            @qualys_object = ::Qualys::Vulnerability.new(data)
           end
         end
 

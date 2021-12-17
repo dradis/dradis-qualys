@@ -16,6 +16,8 @@ module Dradis::Plugins::Qualys
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Qualys
         super(args)
+
+        @issue_lookup = {}
       end
 
       def import(params={})
@@ -45,15 +47,41 @@ module Dradis::Plugins::Qualys
           process_issue(xml_qid)
         end
 
+        doc.xpath('WAS_SCAN_REPORT/RESULTS/VULNERABILITY_LIST/VULNERABILITY').each do |xml_vulnerability|
+          process_evidence(xml_vulnerability)
+        end
+
         true
       end
 
       private
+      attr_accessor :webapp_node, :issue_lookup
+
+      def process_evidence(xml_vulnerability)
+
+        id = xml_vulnerability.at_xpath('./ID').text
+
+        issue = issue_lookup[xml_vulnerability.at_xpath('./QID').text.to_i]
+        if issue
+          logger.info{ "\t => Creating new evidence (plugin_id: #{id})" }
+          logger.info{ "\t\t => Issue: #{issue.title} (plugin_id: #{issue.id})" }
+          logger.info{ "\t\t => Node: #{webapp_node.label} (#{webapp_node.id})" }
+        else
+          logger.info{ "\t => Couldn't find QID for evidence with ID=#{id}" }
+          return
+        end
+
+        evidence_content = template_service.process_template(template: 'was-evidence', data: xml_vulnerability)
+        content_service.create_evidence(issue: issue, node: webapp_node, content: evidence_content)
+      end
+
       def process_issue(xml_qid)
         qid = xml_qid.at_xpath('QID').text
         logger.info{ "\t => Creating new issue (plugin_id: #{ qid })" }
         issue_text = template_service.process_template(template: 'was-issue', data: xml_qid)
         issue = content_service.create_issue(text: issue_text, id: qid)
+
+        issue_lookup[qid.to_i] = issue
       end
 
       def process_webapp(xml_webapp)
@@ -64,13 +92,13 @@ module Dradis::Plugins::Qualys
         scope = xml_webapp.at_xpath('./SCOPE').text
 
         uri = URI(url)
-        @node = content_service.create_node(label: uri.host)
+        @webapp_node = content_service.create_node(label: uri.host)
 
-        @node.set_property('qualys.webapp.id', id)
-        @node.set_property('qualys.webapp.name', name)
-        @node.set_property('qualys.webapp.url', url)
-        @node.set_property('qualys.webapp.scope', scope)
-        @node.save!
+        webapp_node.set_property('qualys.webapp.id', id)
+        webapp_node.set_property('qualys.webapp.name', name)
+        webapp_node.set_property('qualys.webapp.url', url)
+        webapp_node.set_property('qualys.webapp.scope', scope)
+        webapp_node.save!
 
         logger.info { 'Webapp name: ' + name }
         logger.info { 'Webapp URL: ' + url }
