@@ -38,6 +38,9 @@ module Dradis::Plugins::Qualys
         logger.info { 'Security Risk: ' + xml_global_summary.at_xpath('./SECURITY_RISK').text }
         logger.info { 'Vulnerabilities found: ' + xml_global_summary.at_xpath('./VULNERABILITY').text }
 
+        xml_webapp = doc.at_xpath('WAS_SCAN_REPORT/APPENDIX/WEBAPP')
+        process_webapp(xml_webapp)
+
         doc.xpath('WAS_SCAN_REPORT/GLOSSARY/QID_LIST/QID').each do |xml_qid|
           process_issue(xml_qid)
         end
@@ -51,6 +54,27 @@ module Dradis::Plugins::Qualys
         logger.info{ "\t => Creating new issue (plugin_id: #{ qid })" }
         issue_text = template_service.process_template(template: 'was-issue', data: xml_qid)
         issue = content_service.create_issue(text: issue_text, id: qid)
+      end
+
+      def process_webapp(xml_webapp)
+
+        id = xml_webapp.at_xpath('./ID').text
+        name = xml_webapp.at_xpath('./NAME').text
+        url = xml_webapp.at_xpath('./URL').text
+        scope = xml_webapp.at_xpath('./SCOPE').text
+
+        uri = URI(url)
+        @node = content_service.create_node(label: uri.host)
+
+        @node.set_property('qualys.webapp.id', id)
+        @node.set_property('qualys.webapp.name', name)
+        @node.set_property('qualys.webapp.url', url)
+        @node.set_property('qualys.webapp.scope', scope)
+        @node.save!
+
+        logger.info { 'Webapp name: ' + name }
+        logger.info { 'Webapp URL: ' + url }
+        logger.info { 'Webapp scope: ' + scope }
       end
     end
   end
