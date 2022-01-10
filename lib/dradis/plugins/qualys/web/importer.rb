@@ -58,13 +58,14 @@ module Dradis::Plugins::Qualys
       attr_accessor :webapp_node, :issue_lookup
 
       def process_evidence(xml_vulnerability)
-
         id = xml_vulnerability.at_xpath('./ID').text
 
         issue = issue_lookup[xml_vulnerability.at_xpath('./QID').text.to_i]
         if issue
+          issue_id = issue.is_a?(Issue) ? issue.id : issue.to_issue.id
+
           logger.info{ "\t => Creating new evidence (plugin_id: #{id})" }
-          logger.info{ "\t\t => Issue: #{issue.title} (plugin_id: #{issue.id})" }
+          logger.info{ "\t\t => Issue: #{issue.title} (plugin_id: #{issue_id})" }
           logger.info{ "\t\t => Node: #{webapp_node.label} (#{webapp_node.id})" }
         else
           logger.info{ "\t => Couldn't find QID for evidence with ID=#{id}" }
@@ -85,7 +86,6 @@ module Dradis::Plugins::Qualys
       end
 
       def process_webapp(xml_webapp)
-
         id = xml_webapp.at_xpath('./ID').text
         name = xml_webapp.at_xpath('./NAME').text
         url = xml_webapp.at_xpath('./URL').text
