@@ -10,4 +10,4 @@ require 'dradis/plugins/qualys/field_processor'
 require 'dradis/plugins/qualys/importer'
 require 'dradis/plugins/qualys/version'
 
-require 'dradis/plugins/qualys/web/importer'
+require 'dradis/plugins/qualys/was/importer'

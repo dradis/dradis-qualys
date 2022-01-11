@@ -9,9 +9,9 @@ module Dradis
             @cat_object = data
             @qualys_object = ::Qualys::Element.new(data.elements.first)
           when 'QID'
-            @qualys_object = ::Qualys::QID.new(data)
+            @qualys_object = ::Qualys::WAS::QID.new(data)
           when 'VULNERABILITY'
-            @qualys_object = ::Qualys::Vulnerability.new(data)
+            @qualys_object = ::Qualys::WAS::Vulnerability.new(data)
           end
         end
 

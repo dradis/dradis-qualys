@@ -14,7 +14,7 @@ module Dradis::Plugins::Qualys
     def self.uploaders
       [
         Dradis::Plugins::Qualys,
-        Dradis::Plugins::Qualys::Web
+        Dradis::Plugins::Qualys::WAS
       ]
     end
   end

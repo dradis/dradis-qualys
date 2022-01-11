@@ -1,4 +1,4 @@
-module Qualys
+module Qualys::WAS
   # This class represents each of the WAS_SCAN_REPORT/GLOSSARY/QID_LIST/QID
   # elements in the Qualys WAS XML document.
   #

@@ -1,7 +1,7 @@
 module Dradis::Plugins::Qualys
 
   # This module knows how to parse Qualys Web Application Scanner format.
-  module Web
+  module WAS
     def self.meta
       package = Dradis::Plugins::Qualys
 
