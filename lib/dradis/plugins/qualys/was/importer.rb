@@ -62,7 +62,7 @@ module Dradis::Plugins::Qualys
 
         issue = issue_lookup[xml_vulnerability.at_xpath('./QID').text.to_i]
         if issue
-          issue_id = issue.is_a?(Issue) ? issue.id : issue.to_issue.id
+          issue_id = issue.respond_to?(:id) ? issue.id : issue.to_issue.id
 
           logger.info{ "\t => Creating new evidence (plugin_id: #{id})" }
           logger.info{ "\t\t => Issue: #{issue.title} (plugin_id: #{issue_id})" }
