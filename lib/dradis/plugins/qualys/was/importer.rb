@@ -92,7 +92,7 @@ module Dradis::Plugins::Qualys
         scope = xml_webapp.at_xpath('./SCOPE').text
 
         uri = URI(url)
-        @webapp_node = content_service.create_node(label: uri.host)
+        @webapp_node = content_service.create_node(label: uri.host, type: :host)
 
         webapp_node.set_property('qualys.webapp.id', id)
         webapp_node.set_property('qualys.webapp.name', name)
