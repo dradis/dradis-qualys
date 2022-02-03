@@ -5,37 +5,15 @@ module Dradis::Plugins
   describe 'Qualys upload plugin' do
     before(:each) do
       # Stub template service
-      templates_dir = File.expand_path('../../../templates', __FILE__)
+      templates_dir = File.expand_path('../../../../templates', __FILE__)
       expect_any_instance_of(Dradis::Plugins::TemplateService)
       .to receive(:default_templates_dir).and_return(templates_dir)
 
-      # Init services
-      plugin = Dradis::Plugins::Qualys
+      stub_content_service
 
-      @content_service = Dradis::Plugins::ContentService::Base.new(
-        logger: Logger.new(STDOUT),
-        plugin: plugin
-      )
-
-      @importer = Dradis::Plugins::Qualys::Importer.new(
+      @importer = Dradis::Plugins::Qualys::Vuln::Importer.new(
         content_service: @content_service
       )
-
-      # Stub dradis-plugins methods
-      #
-      # They return their argument hashes as objects mimicking
-      # Nodes, Issues, etc
-      allow(@content_service).to receive(:create_node) do |args|
-        obj = OpenStruct.new(args)
-        obj.define_singleton_method(:set_property) { |_, __| }
-        obj
-      end
-      allow(@content_service).to receive(:create_issue) do |args|
-        OpenStruct.new(args)
-      end
-      allow(@content_service).to receive(:create_evidence) do |args|
-        OpenStruct.new(args)
-      end
     end
 
     let(:example_xml) { 'spec/fixtures/files/simple.xml' }
@@ -84,12 +62,12 @@ module Dradis::Plugins
       expect_to_create_issue_with(
         text: "Apache 1.3 HTTP Server Expect Header Cross-Site Scripting"
       )
-      
+
       expect_to_create_issue_with(
           text: "Apache Web Server ETag Header Information Disclosure Weakness",
           text: "OpenBSD has released a \"patch\":ftp://ftp.openbsd.org/pub/OpenBSD/patches/3.2/common/008_httpd.patch that fixes this vulnerability. After installing the patch, inode numbers returned from the server are encoded using a private hash to avoid the release of sensitive information.\n\n\n\nCustomers"
       )
-      
+
       run_import!
     end
 
@@ -165,28 +143,5 @@ module Dradis::Plugins
         @importer.import(file: 'spec/fixtures/files/no_result.xml')
       end
     end
-
-
-    def expect_to_create_node_with(label:)
-      expect(@content_service).to receive(:create_node).with(
-        hash_including label: label
-      ).once
-    end
-
-    def expect_to_create_issue_with(text:)
-      expect(@content_service).to receive(:create_issue) do |args|
-        expect(args[:text]).to include text
-        OpenStruct.new(args)
-      end.once
-    end
-
-    def expect_to_create_evidence_with(content:, issue:, node_label:)
-      expect(@content_service).to receive(:create_evidence) do |args|
-        expect(args[:content]).to include content
-        expect(args[:issue].text).to include issue
-        expect(args[:node].label).to eq node_label
-      end.once
-    end
-
   end
 end
