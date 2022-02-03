@@ -14,7 +14,7 @@ class QualysTasks < Thor
 
     detect_and_set_project_scope
 
-    importer = Dradis::Plugins::Qualys::Importer.new(task_options)
+    importer = Dradis::Plugins::Qualys::Vuln::Importer.new(task_options)
     importer.import(file: file_path)
   end
 
