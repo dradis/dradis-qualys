@@ -1,4 +1,4 @@
-v4.2.0 ([month], 2022)
+v4.2.0 (February 2022)
   - Added 'element.qualys_collection' as issue field
   - Added Qualys Web Application Scanner (WAS) support
 
