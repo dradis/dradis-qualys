@@ -1,4 +1,8 @@
-v4.1.0 ([month] [YYYY])
+v4.2.0 (February 2022)
+  - Added 'element.qualys_collection' as issue field
+  - Added Qualys Web Application Scanner (WAS) support
+
+v4.1.0 (November 2021)
   - Add <dd>, <dt> support
   - Remove orphaned <b> tags
   - Wrap ciphers in code blocks

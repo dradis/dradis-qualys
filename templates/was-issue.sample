@@ -1,0 +1,24 @@
+<QID>
+    <QID>150001</QID>
+    <CATEGORY>Confirmed Vulnerability</CATEGORY>
+    <SEVERITY>5</SEVERITY>
+    <TITLE>Reflected Cross-Site Scripting (XSS) Vulnerabilities</TITLE>
+    <GROUP>XSS</GROUP>
+    <OWASP>A7</OWASP>
+    <WASC>WASC-8</WASC>
+    <CWE>CWE-79</CWE>
+    <CVSS_BASE>4.3</CVSS_BASE>
+    <CVSS_TEMPORAL>3.9</CVSS_TEMPORAL>
+    <CVSS_V3>
+        <BASE>6.1</BASE>
+        <TEMPORAL>5.8</TEMPORAL>
+        <ATTACK_VECTOR>Network</ATTACK_VECTOR>
+    </CVSS_V3>
+    <DESCRIPTION><![CDATA[XSS vulnerabilities occur when the Web application echoes user-supplied data in an HTML response sent to the Web browser. For example, a Web application might include the user's name as part of a welcome message or display a home address when confirming a shipping destination. If the user-supplied data contain characters that are interpreted as part of an HTML element instead of literal text, then an attacker can modify the HTML that is received by the victim's Web browser.
+<P>
+The XSS payload is echoed in HTML document returned by the request. An XSS payload may consist of HTML, JavaScript or other content that will be rendered by the browser. In order to exploit this vulnerability, a malicious user would need to trick a victim into visiting the URL with the XSS payload.]]></DESCRIPTION>
+    <IMPACT>XSS exploits pose a significant threat to a Web application, its users and user data. XSS exploits target the users of a Web application rather than the Web application itself. An exploit can lead to theft of the user's credentials and personal or financial information. Complex exploits and attack scenarios are possible via XSS because it enables an attacker to execute dynamic code. Consequently, any capability or feature available to the Web browser (for example HTML, JavaScript, Flash and Java applets) can be used to as a part of a compromise.</IMPACT>
+    <SOLUTION><![CDATA[Filter all data collected from the client including user-supplied content and browser content such as Referrer and User-Agent headers.
+<P>
+Any data collected from the client and displayed in a Web page should be HTML-encoded to ensure the content is rendered as text instead of an HTML element or JavaScript.]]></SOLUTION>
+</QID>

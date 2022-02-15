@@ -1,0 +1,11 @@
+#[Location]#
+%was-evidence.url%
+
+#[AccessPaths]#
+%was-evidence.access_paths%
+
+#[Flags]#
+Ajax: %was-evidence.ajax%
+Authentication: %was-evidence.authentication%
+Ignored: %was-evidence.ignored%
+Potential: %was-evidence.potential%
