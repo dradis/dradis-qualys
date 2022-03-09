@@ -12,6 +12,10 @@ module Dradis
             @qualys_object = ::Qualys::WAS::QID.new(data)
           when 'VULNERABILITY'
             @qualys_object = ::Qualys::WAS::Vulnerability.new(data)
+          when 'VULN_DETAILS'
+            @qualys_object = ::Qualys::Asset::Vulnerability.new(data)
+          when 'VULN_INFO'
+            @qualys_object = ::Qualys::Asset::Evidence.new(data)
           end
         end
 

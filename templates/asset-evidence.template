@@ -1,0 +1,11 @@
+#[Result]#
+%asset-evidence.threat%
+
+#[Status]#
+%asset-evidence.status%
+
+#[SSL]#
+%asset-evidence.ssl%
+
+#[CVSSv3.Final]#
+%asset-evidence.cvss_final%

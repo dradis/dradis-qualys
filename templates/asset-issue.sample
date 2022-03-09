@@ -1,0 +1,21 @@
+<VULN_DETAILS id="qid_11">
+  <QID id="qid_11">11</QID>
+  <TITLE><![CDATA[Hidden RPC Services]]></TITLE>
+  <SEVERITY>2</SEVERITY>
+  <CATEGORY>RPC</CATEGORY>
+  <THREAT><![CDATA[The Portmapper/Rpcbind listens on port 111 and stores an updated list of registered RPC services running on the server (RPC name, version and port number). It acts as a "gateway" for clients wanting to connect to any RPC daemon. 
+<P>
+When the portmapper/rpcbind is removed or firewalled, standard RPC client programs fail to obtain the portmapper list.  However, by sending carefully crafted packets, it's possible to determine which RPC programs are listening on which port. This technique is known as direct RPC scanning. It's used to bypass portmapper/rpcbind in order to find RPC programs running on a port (TCP or UDP ports). On Linux servers, RPC services are typically listening on privileged ports (below 1024), whereas on Solaris, RPC services are on temporary ports (starting with port 32700).]]></THREAT>
+  <IMPACT><![CDATA[Unauthorized users can build a list of RPC services running on the host. If they discover vulnerable RPC services on the host, they then can exploit them.]]></IMPACT>
+  <SOLUTION><![CDATA[Firewalling the portmapper port or removing the portmapper service is not sufficient to prevent unauthorized users from accessing the RPC daemons. You should remove all RPC services that are not strictly required on this host.]]></SOLUTION>
+  <PCI_FLAG>1</PCI_FLAG>
+  <LAST_UPDATE>1999-01-01T08:00:00Z</LAST_UPDATE>
+  <CVSS_SCORE>
+    <CVSS_BASE source="service">5</CVSS_BASE>
+    <CVSS_TEMPORAL>3.6</CVSS_TEMPORAL>
+  </CVSS_SCORE>
+  <CVSS3_SCORE>
+    <CVSS3_BASE>-</CVSS3_BASE>
+    <CVSS3_TEMPORAL>-</CVSS3_TEMPORAL>
+  </CVSS3_SCORE>
+</VULN_DETAILS>

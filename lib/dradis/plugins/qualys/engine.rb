@@ -13,6 +13,7 @@ module Dradis::Plugins::Qualys
     #  Dradis::Plugins::Upload::Base in dradis-plugins
     def self.uploaders
       [
+        Dradis::Plugins::Qualys::Asset,
         Dradis::Plugins::Qualys::Vuln,
         Dradis::Plugins::Qualys::WAS
       ]
