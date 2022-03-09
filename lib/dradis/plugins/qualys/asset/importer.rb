@@ -60,8 +60,8 @@ module Dradis::Plugins::Qualys
         )
 
         %w[dns host_id operating_system qg_hostid tracking_method].each do |key|
-          prop = xml_node.at_xpath()
-          host_node.set_property(key.upcase.to_sym, prop.text) if prop
+          prop = xml_node.at_xpath(key.upcase)
+          host_node.set_property(key.to_sym, prop.text) if prop
         end
 
         tags = xml_node.at_xpath('ASSET_TAGS/ASSET_TAG')
