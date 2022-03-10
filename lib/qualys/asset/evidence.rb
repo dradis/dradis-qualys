@@ -54,9 +54,7 @@ module Qualys::Asset
     def process_field_value(method)
       tag = @xml.at_xpath("./#{method.upcase}")
 
-      if method.starts_with?('cvss')
-        process_cvss_field(method)
-      elsif tag && !tag.text.blank?
+      if tag && !tag.text.blank?
         if tags_with_html_content.include?(method)
           Qualys.cleanup_html(tag.text)
         else
@@ -67,21 +65,10 @@ module Qualys::Asset
       end
     end
 
-    def process_cvss_field(method)
-      translations_table = {
-        cvss_base: 'CVSS_SCORE/CVSS_BASE',
-        cvss_temporal: 'CVSS_SCORE/CVSS_TEMPORAL',
-        cvss3_base: 'CVSS3_SCORE/CVSS3_BASE',
-        cvss3_temporal: 'CVSS3_SCORE/CVSS3_TEMPORAL'
-      }
-
-      @xml.xpath("./#{translations_table[method.to_sym]}").text
-    end
-
     private
 
     def tags_with_html_content
-      %w[threat impact solution]
+      %w[result]
     end
   end
 end
