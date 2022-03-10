@@ -2,7 +2,7 @@
 %asset-evidence.result%
 
 #[Status]#
-%asset-evidence.status%
+%asset-evidence.vuln_status%
 
 #[SSL]#
 %asset-evidence.ssl%
