@@ -1,5 +1,7 @@
 module Dradis::Plugins::Qualys
   module Asset
+    ROOT_PATH_NAME = 'ASSET_DATA_HOST'.freeze
+
     def self.meta
       package = Dradis::Plugins::Qualys
 
@@ -28,7 +30,7 @@ module Dradis::Plugins::Qualys
         doc = Nokogiri::XML(file_content)
         logger.info { 'Done.' }
 
-        if doc.root.name != 'ASSET_DATA_REPORT'
+        if doc.root.name != ROOT_PATH_NAME
           error = 'No scan results were detected in the uploaded file. Ensure you uploaded a Qualys ASSET XML file.'
           logger.fatal { error }
           content_service.create_note text: error
