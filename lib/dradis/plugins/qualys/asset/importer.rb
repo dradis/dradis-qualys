@@ -1,6 +1,6 @@
 module Dradis::Plugins::Qualys
   module Asset
-    ROOT_PATH_NAME = 'ASSET_DATA_HOST'.freeze
+    ROOT_PATH_NAME = 'ASSET_DATA_REPORT'.freeze
 
     def self.meta
       package = Dradis::Plugins::Qualys
