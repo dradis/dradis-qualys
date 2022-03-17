@@ -1,5 +1,6 @@
 v4.3.0 ([month] 2022)
   - Adds Qualys Asset Scanner (ASSET) support
+  - Registers template mappings locally
   - Upgraded gems:
     - [gem]
   - Bugs fixes:

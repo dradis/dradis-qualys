@@ -18,5 +18,13 @@ module Dradis::Plugins::Qualys
         Dradis::Plugins::Qualys::WAS
       ]
     end
+
+    def self.template_names
+      {
+        Dradis::Plugins::Qualys::Asset => { evidence: 'asset-evidence', issue: 'asset-issue' },
+        Dradis::Plugins::Qualys::Vuln => { evidence: 'evidence', issue: 'element' },
+        Dradis::Plugins::Qualys::WAS => { evidence: 'was-evidence', issue: 'was-issue' }
+      }
+    end
   end
 end
