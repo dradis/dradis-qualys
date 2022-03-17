@@ -17,8 +17,8 @@
           <END>10.0.255.255</END>
         </RANGE>
         <RANGE network_id="-100">
-          <START>172.16.0.0</START>
-          <END>172.18.255.255</END>
+          <START>192.168.0.0</START>
+          <END>192.168.255.255</END>
         </RANGE>
       </COMBINED_IP_LIST>
       <ASSET_TAG_LIST>
@@ -35,7 +35,7 @@
   </HEADER>
   <HOST_LIST>
     <HOST>
-      <IP network_id="0">10.0.2.8</IP>
+      <IP network_id="0">10.0.0.1</IP>
       <TRACKING_METHOD>QAGENT</TRACKING_METHOD>
       <ASSET_TAGS>
         <ASSET_TAG><![CDATA[Cloud Agent]]></ASSET_TAG>
@@ -95,12 +95,12 @@ When the portmapper/rpcbind is removed or firewalled, standard RPC client progra
           <END>10.0.0.4</END>
         </RANGE>
         <RANGE network_id="-100">
-          <START>172.18.1.6</START>
-          <END>172.18.2.4</END>
+          <START>192.168.0.0</START>
+          <END>192.168.2.4</END>
         </RANGE>
         <RANGE network_id="-100">
-          <START>172.18.2.6</START>
-          <END>172.18.255.255</END>
+          <START>192.168.2.6</START>
+          <END>192.168.255.255</END>
         </RANGE>
       </IP_LIST>
     </NO_RESULTS>
@@ -124,4 +124,3 @@ When the portmapper/rpcbind is removed or firewalled, standard RPC client progra
   </APPENDICES>
 </ASSET_DATA_REPORT>
 <!-- CONFIDENTIAL AND PROPRIETARY INFORMATION. Qualys provides the QualysGuard Service "As Is," without any warranty of any kind. Qualys makes no warranty that the information contained in this report is complete or error-free. Copyright 2021, Qualys, Inc. //--> 
-
