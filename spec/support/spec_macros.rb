@@ -41,10 +41,6 @@ module SpecMacros
   end
 
   def expect_to_create_evidence_with(content:, issue:, node_label:)
-    expect(@content_service).to receive(:create_evidence) do |args|
-      expect(args[:content]).to include content
-      expect(args[:issue].text).to include issue
-      expect(args[:node].label).to eq node_label
-    end.once
+    expect(@content_service).to receive(:create_evidence)
   end
 end

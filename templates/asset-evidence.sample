@@ -1,0 +1,14 @@
+<VULN_INFO>
+  <QID id="qid_238938">238938</QID>
+  <TYPE>Vuln</TYPE>
+  <SSL>false</SSL>
+  <RESULT format="table"><![CDATA[Package	Installed Version	Required Version
+kernel-debug	3.10.0-957.27.2.el7.x86_64	3.10.0-1160.11.1.el7
+kernel-debug	3.10.0-1160.6.1.el7.x86_64	3.10.0-1160.11.1.el7]]></RESULT>
+  <FIRST_FOUND>2020-12-18T13:11:56Z</FIRST_FOUND>
+  <LAST_FOUND>2021-03-19T13:05:42Z</LAST_FOUND>
+  <TIMES_FOUND>447</TIMES_FOUND>
+  <VULN_STATUS>Active</VULN_STATUS>
+  <CVSS_FINAL>5.5</CVSS_FINAL>
+  <CVSS3_FINAL>6.3</CVSS3_FINAL>
+</VULN_INFO>

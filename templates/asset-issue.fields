@@ -1,0 +1,14 @@
+asset-issue.category
+asset-issue.cvss3_base
+asset-issue.cvss3_temporal
+asset-issue.cvss_base
+asset-issue.cvss_temporal
+asset-issue.impact
+asset-issue.last_update
+asset-issue.pci_flag
+asset-issue.qid
+asset-issue.result
+asset-issue.severity
+asset-issue.solution
+asset-issue.threat
+asset-issue.title
