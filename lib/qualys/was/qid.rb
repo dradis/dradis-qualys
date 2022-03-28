@@ -48,19 +48,33 @@ module Qualys::WAS
         return
       end
 
-      method_name = method.to_s
+      process_field_value(method.to_s)
+    end
 
-      # Then we try simple children tags: TITLE, LAST_UPDATE, CVSS_BASE...
-      tag = @xml.at_xpath("./#{method_name.upcase}")
-      if tag && !tag.text.blank?
+    def process_field_value(method)
+      tag = @xml.at_xpath("./#{method.upcase}")
+
+      if method.starts_with?('cvss3')
+        process_cvss3_field(method)
+      elsif tag && !tag.text.blank?
         if tags_with_html_content.include?(method)
-          return Qualys::cleanup_html(tag.text)
+          Qualys.cleanup_html(tag.text)
         else
-          return tag.text
+          tag.text
         end
       else
         'n/a'
       end
+    end
+
+    def process_cvss3_field(method)
+      translations_table = {
+        cvss3_vector: 'CVSS_V3/ATTACK_VECTOR',
+        cvss3_base: 'CVSS_V3/BASE',
+        cvss3_temporal: 'CVSS_V3/TEMPORAL'
+      }
+
+      @xml.xpath("./#{translations_table[method.to_sym]}").text
     end
 
     private
