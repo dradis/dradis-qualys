@@ -3,6 +3,7 @@ v4.3.0 ([month] 2022)
   - Upgraded gems:
     - [gem]
   - Bugs fixes:
+    - Fixes WAS CVSS3 mapping and not importing fields to the issue
     - [future tense verb] [bug fix]
     - Bug tracker items:
       - [item]
