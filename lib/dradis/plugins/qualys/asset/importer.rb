@@ -2,6 +2,10 @@ module Dradis::Plugins::Qualys
   module Asset
     ROOT_PATH_NAME = 'ASSET_DATA_REPORT'.freeze
 
+    def self.templates
+      { evidence: 'asset-evidence', issue: 'asset-issue' }
+    end
+
     def self.meta
       package = Dradis::Plugins::Qualys
 

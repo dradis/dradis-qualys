@@ -2,6 +2,10 @@ module Dradis::Plugins::Qualys
 
   # This module knows how to parse Qualys Web Application Scanner format.
   module WAS
+    def self.templates
+      { evidence: 'was-evidence', issue: 'was-issue' }
+    end
+
     def self.meta
       package = Dradis::Plugins::Qualys
 

@@ -1,5 +1,9 @@
 module Dradis::Plugins::Qualys
   module Vuln
+    def self.templates
+      { evidence: 'evidence', issue: 'element' }
+    end
+
     def self.meta
       package = Dradis::Plugins::Qualys
 
