@@ -2,10 +2,6 @@ module Dradis::Plugins::Qualys
 
   # This module knows how to parse Qualys Web Application Scanner format.
   module WAS
-    def self.templates
-      { evidence: 'was-evidence', issue: 'was-issue' }
-    end
-
     def self.meta
       package = Dradis::Plugins::Qualys
 
@@ -17,6 +13,10 @@ module Dradis::Plugins::Qualys
     end
 
     class Importer < Dradis::Plugins::Upload::Importer
+      def self.templates
+        { evidence: 'was-evidence', issue: 'was-issue' }
+      end
+
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Qualys
         super(args)

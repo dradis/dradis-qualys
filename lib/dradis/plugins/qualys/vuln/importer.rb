@@ -1,9 +1,5 @@
 module Dradis::Plugins::Qualys
   module Vuln
-    def self.templates
-      { evidence: 'evidence', issue: 'element' }
-    end
-
     def self.meta
       package = Dradis::Plugins::Qualys
 
@@ -16,6 +12,10 @@ module Dradis::Plugins::Qualys
 
     class Importer < Dradis::Plugins::Upload::Importer
       attr_accessor :host_node
+
+      def self.templates
+        { evidence: 'evidence', issue: 'element' }
+      end
 
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Qualys
