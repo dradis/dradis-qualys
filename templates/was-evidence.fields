@@ -3,8 +3,9 @@ was-evidence.ajax
 was-evidence.authentication
 was-evidence.ignored
 was-evidence.potential
-was-evidence.request
+was-evidence.request_headers
 was-evidence.request_method
 was-evidence.request_url
-was-evidence.response
+was-evidence.response_contents
+was-evidence.response_evidence
 was-evidence.url
