@@ -7,8 +7,10 @@
 Method: %was-evidence.request_method%
 URL: %was-evidence.request_url%
 
-bc.. %was-evidence.request%
+bc.. %was-evidence.request_headers%
 
 p. *Response*
 
-bc.. %was-evidence.response%
+Evidence: %was-evidence.response_evidence%
+
+bc.. %was-evidence.response_contents%
