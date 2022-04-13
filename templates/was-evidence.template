@@ -1,11 +1,14 @@
 #[Location]#
 %was-evidence.url%
 
-#[AccessPaths]#
-%was-evidence.access_paths%
+#[Output]#
+*Request*
 
-#[Flags]#
-Ajax: %was-evidence.ajax%
-Authentication: %was-evidence.authentication%
-Ignored: %was-evidence.ignored%
-Potential: %was-evidence.potential%
+Method: %was-evidence.request_method%
+URL: %was-evidence.request_url%
+
+bc.. %was-evidence.request%
+
+p. *Response*
+
+bc.. %was-evidence.response%
