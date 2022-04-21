@@ -1,5 +1,6 @@
 v4.3.0 ([month] 2022)
   - Adds Qualys Asset Scanner (ASSET) support
+  - Adds Request/Response Evidence fields for Web Application Scans (WAS)
   - Upgraded gems:
     - [gem]
   - Bugs fixes:
