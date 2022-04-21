@@ -1,4 +1,4 @@
-v4.3.0 ([month] 2022)
+v4.3.0 (April 2022)
   - Adds Qualys Asset Scanner (ASSET) support
 
 v4.2.0 (February 2022)
