@@ -1,15 +1,5 @@
 v4.3.0 ([month] 2022)
   - Adds Qualys Asset Scanner (ASSET) support
-  - Upgraded gems:
-    - [gem]
-  - Bugs fixes:
-    - [future tense verb] [bug fix]
-    - Bug tracker items:
-      - [item]
-  - Security Fixes:
-    - High: (Authenticated|Unauthenticated) (admin|author|contributor) [vulnerability description]
-    - Medium: (Authenticated|Unauthenticated) (admin|author|contributor) [vulnerability description]
-    - Low: (Authenticated|Unauthenticated) (admin|author|contributor) [vulnerability description]
 
 v4.2.0 (February 2022)
   - Adds 'element.qualys_collection' as issue field
