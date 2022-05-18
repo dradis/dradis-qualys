@@ -1,16 +1,10 @@
-v4.3.0 ([month] 2022)
-  - Adds Qualys Asset Scanner (ASSET) support
+[v#.#.#] ([month] [YYYY])
   - Registers template mappings locally
-  - Upgraded gems:
-    - [gem]
+
+v4.3.0 (April 2022)
+  - Adds Qualys Asset Scanner (ASSET) support
   - Bugs fixes:
-    - [future tense verb] [bug fix]
-    - Bug tracker items:
-      - [item]
-  - Security Fixes:
-    - High: (Authenticated|Unauthenticated) (admin|author|contributor) [vulnerability description]
-    - Medium: (Authenticated|Unauthenticated) (admin|author|contributor) [vulnerability description]
-    - Low: (Authenticated|Unauthenticated) (admin|author|contributor) [vulnerability description]
+    - Fixes WAS CVSS3 mapping and not importing fields to the issue
 
 v4.2.0 (February 2022)
   - Adds 'element.qualys_collection' as issue field

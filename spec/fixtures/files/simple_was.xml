@@ -110,6 +110,13 @@
                 <DESCRIPTION>The fully qualified domain name of this host, if it was obtained from a DNS server, is displayed in the RESULT section.</DESCRIPTION>
                 <IMPACT>N/A</IMPACT>
                 <SOLUTION>N/A</SOLUTION>
+                <CVSS_BASE>4.3</CVSS_BASE>
+                <CVSS_TEMPORAL>3.9</CVSS_TEMPORAL>
+                <CVSS_V3>
+                    <BASE>6.1</BASE>
+                    <TEMPORAL>5.8</TEMPORAL>
+                    <ATTACK_VECTOR>Network</ATTACK_VECTOR>
+                </CVSS_V3>
             </QID>
         </QID_LIST>
     </GLOSSARY>
