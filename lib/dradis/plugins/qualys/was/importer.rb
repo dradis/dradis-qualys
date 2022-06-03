@@ -13,6 +13,10 @@ module Dradis::Plugins::Qualys
     end
 
     class Importer < Dradis::Plugins::Upload::Importer
+      def self.templates
+        { evidence: 'was-evidence', issue: 'was-issue' }
+      end
+
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Qualys
         super(args)

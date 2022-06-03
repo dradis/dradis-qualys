@@ -1,7 +1,6 @@
 module Dradis::Plugins::Qualys
   module Asset
     ROOT_PATH_NAME = 'ASSET_DATA_REPORT'.freeze
-
     def self.meta
       package = Dradis::Plugins::Qualys
 
@@ -13,6 +12,10 @@ module Dradis::Plugins::Qualys
     end
 
     class Importer < Dradis::Plugins::Upload::Importer
+      def self.templates
+        { evidence: 'asset-evidence', issue: 'asset-issue' }
+      end
+
       def initialize(args={})
         args[:plugin] = Dradis::Plugins::Qualys
         super(args)

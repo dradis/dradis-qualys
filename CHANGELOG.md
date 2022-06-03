@@ -1,6 +1,11 @@
+[v#.#.#] ([month] [YYYY])
+  - Adds Request/Response Evidence fields for Web Application Scans (WAS)
+  - Registers template mappings locally
+  - Bugs fixes:
+    - Fixes WAS CVSS3 mapping and not importing fields to the issue
+
 v4.3.0 (April 2022)
   - Adds Qualys Asset Scanner (ASSET) support
-  - Adds Request/Response Evidence fields for Web Application Scans (WAS)
 
 v4.2.0 (February 2022)
   - Adds 'element.qualys_collection' as issue field
