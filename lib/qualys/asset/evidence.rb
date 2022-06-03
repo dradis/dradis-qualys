@@ -1,13 +1,13 @@
-module Qualys::WAS
-  # This class represents each of the WAS_SCAN_REPORT/GLOSSARY/QID_LIST/QID
-  # elements in the Qualys WAS XML document.
+module Qualys::Asset
+  # This class represents each of the ASSET_DATA_REPORT/GLOSSARY/VULN_INFO_LIST/
+  # VULN_INFO elements in the Qualys Asset XML document.
   #
   # It provides a convenient way to access the information scattered all over
   # the XML in attributes and nested tags.
   #
   # Instead of providing separate methods for each supported property we rely
   # on Ruby's #method_missing to do most of the work.
-  class QID
+  class Evidence
     # Accepts an XML node from Nokogiri::XML.
     def initialize(xml_node)
       @xml = xml_node
@@ -18,10 +18,10 @@ module Qualys::WAS
     def supported_tags
       [
         # simple tags
-        :category, :cwe, :description, :group, :impact, :owasp, :qid,
-        :severity, :solution, :title, :wasc,
+        :first_round, :last_round, :result, :ssl, :times_found,
+        :type, :vuln_status,
 
-        :cvss_base, :cvss_temporal, :cvss3_base, :cvss3_temporal, :cvss3_vector
+        :cvss_base, :cvss3_final
       ]
     end
 
@@ -54,9 +54,7 @@ module Qualys::WAS
     def process_field_value(method)
       tag = @xml.at_xpath("./#{method.upcase}")
 
-      if method.starts_with?('cvss3')
-        process_cvss3_field(method)
-      elsif tag && !tag.text.blank?
+      if tag && !tag.text.blank?
         if tags_with_html_content.include?(method)
           Qualys.cleanup_html(tag.text)
         else
@@ -67,19 +65,10 @@ module Qualys::WAS
       end
     end
 
-    def process_cvss3_field(method)
-      translations_table = {
-        cvss3_vector: 'CVSS_V3/ATTACK_VECTOR',
-        cvss3_base: 'CVSS_V3/BASE',
-        cvss3_temporal: 'CVSS_V3/TEMPORAL'
-      }
-
-      @xml.xpath("./#{translations_table[method.to_sym]}").text
-    end
-
     private
+
     def tags_with_html_content
-      [:description, :impact, :solution]
+      %w[result]
     end
   end
 end

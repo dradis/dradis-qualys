@@ -1,6 +1,14 @@
+[v#.#.#] ([month] [YYYY])
+  - Registers template mappings locally
+
+v4.3.0 (April 2022)
+  - Adds Qualys Asset Scanner (ASSET) support
+  - Bugs fixes:
+    - Fixes WAS CVSS3 mapping and not importing fields to the issue
+
 v4.2.0 (February 2022)
-  - Added 'element.qualys_collection' as issue field
-  - Added Qualys Web Application Scanner (WAS) support
+  - Adds 'element.qualys_collection' as issue field
+  - Adds Qualys Web Application Scanner (WAS) support
 
 v4.1.0 (November 2021)
   - Add <dd>, <dt> support

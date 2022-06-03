@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE ASSET_DATA_REPORT SYSTEM "https://qualysguard.qg3.apps.qualys.com/asset_data_report.dtd">
+<ASSET_DATA_REPORT>
+  <HEADER>
+    <COMPANY><![CDATA[Security Roots Ltd.]]></COMPANY>
+    <USERNAME>dradispro</USERNAME>
+    <GENERATION_DATETIME>2021-03-19T18:16:17Z</GENERATION_DATETIME>
+    <TEMPLATE><![CDATA[Technical Report]]></TEMPLATE>
+    <TARGET>
+      <USER_ASSET_GROUPS>
+        <ASSET_GROUP_TITLE><![CDATA[ProdManagement]]></ASSET_GROUP_TITLE>
+      </USER_ASSET_GROUPS>
+      <COMBINED_IP_LIST>
+        <RANGE network_id="-100">
+          <START>10.0.0.0</START>
+          <END>10.0.255.255</END>
+        </RANGE>
+        <RANGE network_id="-100">
+          <START>192.168.0.0</START>
+          <END>192.168.255.255</END>
+        </RANGE>
+      </COMBINED_IP_LIST>
+      <ASSET_TAG_LIST>
+        <INCLUDED_TAGS scope="any">
+          <ASSET_TAG><![CDATA[asset-tag]]></ASSET_TAG>
+        </INCLUDED_TAGS>
+      </ASSET_TAG_LIST>
+    </TARGET>
+    <RISK_SCORE_SUMMARY>
+      <TOTAL_VULNERABILITIES>479</TOTAL_VULNERABILITIES>
+      <AVG_SECURITY_RISK>2.5</AVG_SECURITY_RISK>
+      <BUSINESS_RISK>48/100</BUSINESS_RISK>
+    </RISK_SCORE_SUMMARY>
+  </HEADER>
+  <HOST_LIST>
+    <HOST>
+      <IP network_id="0">10.0.0.1</IP>
+      <TRACKING_METHOD>QAGENT</TRACKING_METHOD>
+      <ASSET_TAGS>
+        <ASSET_TAG><![CDATA[Cloud Agent]]></ASSET_TAG>
+      </ASSET_TAGS>
+      <HOST_ID>112859328</HOST_ID>
+      <DNS><![CDATA[ontlpmutil01]]></DNS>
+      <QG_HOSTID><![CDATA[8d7fb998-0512-48c3-bb94-e40ac09ce9d4]]></QG_HOSTID>
+      <OPERATING_SYSTEM><![CDATA[Red Hat Enterprise Linux Server 7.9]]></OPERATING_SYSTEM>
+      <VULN_INFO_LIST>
+        <VULN_INFO>
+          <QID id="qid_11">11</QID>
+          <TYPE>Vuln</TYPE>
+          <SSL>false</SSL>
+          <RESULT format="table"><![CDATA[Package	Installed Version	Required Version
+kernel-debug	3.10.0-957.27.2.el7.x86_64	3.10.0-1160.11.1.el7
+kernel-debug	3.10.0-1160.6.1.el7.x86_64	3.10.0-1160.11.1.el7]]></RESULT>
+          <FIRST_FOUND>2020-12-18T13:11:56Z</FIRST_FOUND>
+          <LAST_FOUND>2021-03-19T13:05:42Z</LAST_FOUND>
+          <TIMES_FOUND>447</TIMES_FOUND>
+          <VULN_STATUS>Active</VULN_STATUS>
+          <CVSS_FINAL>5.5</CVSS_FINAL>
+          <CVSS3_FINAL>6.3</CVSS3_FINAL>
+        </VULN_INFO>
+      </VULN_INFO_LIST>
+    </HOST>
+  </HOST_LIST>
+  <GLOSSARY>
+    <VULN_DETAILS_LIST>
+      <VULN_DETAILS id="qid_11">
+        <QID id="qid_11">11</QID>
+        <TITLE><![CDATA[Hidden RPC Services]]></TITLE>
+        <SEVERITY>2</SEVERITY>
+        <CATEGORY>RPC</CATEGORY>
+        <THREAT><![CDATA[The Portmapper/Rpcbind listens on port 111 and stores an updated list of registered RPC services running on the server (RPC name, version and port number). It acts as a "gateway" for clients wanting to connect to any RPC daemon. 
+<P>
+When the portmapper/rpcbind is removed or firewalled, standard RPC client programs fail to obtain the portmapper list.  However, by sending carefully crafted packets, it's possible to determine which RPC programs are listening on which port. This technique is known as direct RPC scanning. It's used to bypass portmapper/rpcbind in order to find RPC programs running on a port (TCP or UDP ports). On Linux servers, RPC services are typically listening on privileged ports (below 1024), whereas on Solaris, RPC services are on temporary ports (starting with port 32700).]]></THREAT>
+        <IMPACT><![CDATA[Unauthorized users can build a list of RPC services running on the host. If they discover vulnerable RPC services on the host, they then can exploit them.]]></IMPACT>
+        <SOLUTION><![CDATA[Firewalling the portmapper port or removing the portmapper service is not sufficient to prevent unauthorized users from accessing the RPC daemons. You should remove all RPC services that are not strictly required on this host.]]></SOLUTION>
+        <PCI_FLAG>1</PCI_FLAG>
+        <LAST_UPDATE>1999-01-01T08:00:00Z</LAST_UPDATE>
+        <CVSS_SCORE>
+          <CVSS_BASE source="service">5</CVSS_BASE>
+          <CVSS_TEMPORAL>3.6</CVSS_TEMPORAL>
+        </CVSS_SCORE>
+        <CVSS3_SCORE>
+          <CVSS3_BASE>-</CVSS3_BASE>
+          <CVSS3_TEMPORAL>-</CVSS3_TEMPORAL>
+        </CVSS3_SCORE>
+      </VULN_DETAILS>
+    </VULN_DETAILS_LIST>
+  </GLOSSARY>
+  <APPENDICES>
+    <NO_RESULTS>
+      <IP_LIST>
+        <RANGE network_id="-100">
+          <START>10.0.0.0</START>
+          <END>10.0.0.4</END>
+        </RANGE>
+        <RANGE network_id="-100">
+          <START>192.168.0.0</START>
+          <END>192.168.2.4</END>
+        </RANGE>
+        <RANGE network_id="-100">
+          <START>192.168.2.6</START>
+          <END>192.168.255.255</END>
+        </RANGE>
+      </IP_LIST>
+    </NO_RESULTS>
+    <TEMPLATE_DETAILS>
+      <FILTER_SUMMARY>
+        Status:New, Active, Re-Opened, Fixed
+        Display non-running kernels:
+        Off
+        Exclude non-running kernels:
+        Off
+        Exclude non-running services:
+        Off
+        Exclude QIDs not exploitable due to configuration:
+        Off
+        Vulnerabilities:
+        State:Active
+        Included Operating Systems:
+        All Operating Systems
+      </FILTER_SUMMARY>
+    </TEMPLATE_DETAILS>
+  </APPENDICES>
+</ASSET_DATA_REPORT>
+<!-- CONFIDENTIAL AND PROPRIETARY INFORMATION. Qualys provides the QualysGuard Service "As Is," without any warranty of any kind. Qualys makes no warranty that the information contained in this report is complete or error-free. Copyright 2021, Qualys, Inc. //--> 
