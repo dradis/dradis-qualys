@@ -1,5 +1,6 @@
 [v#.#.#] ([month] [YYYY])
   - Registers template mappings locally
+  - Wrap ciphers in code blocks
 
 v4.3.0 (April 2022)
   - Adds Qualys Asset Scanner (ASSET) support
@@ -13,7 +14,6 @@ v4.2.0 (February 2022)
 v4.1.0 (November 2021)
   - Add <dd>, <dt> support
   - Remove orphaned <b> tags
-  - Wrap ciphers in code blocks
 
 v4.0.0 (July 2021)
   - No changes
