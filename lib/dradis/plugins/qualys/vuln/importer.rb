@@ -96,7 +96,6 @@ module Dradis::Plugins::Qualys
       def process_vuln(vuln_number, xml_cat)
         logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
         issue_text = template_service.process_template(template: 'element', data: xml_cat)
-
         issue = content_service.create_issue(text: issue_text, id: vuln_number)
 
         logger.info{ "\t\t => Creating new evidence" }
