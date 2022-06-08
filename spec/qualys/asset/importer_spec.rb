@@ -20,7 +20,7 @@ module Dradis::Plugins
     let(:run_import!) { @importer.import(file: example_xml) }
 
     it 'creates nodes as needed' do
-      expect_to_create_node_with(label: '10.0.2.8')
+      expect_to_create_node_with(label: '10.0.0.1')
       run_import!
     end
 
