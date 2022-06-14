@@ -143,5 +143,22 @@ module Dradis::Plugins
         @importer.import(file: 'spec/fixtures/files/no_result.xml')
       end
     end
+
+    context 'VULN with ciphers' do
+      it 'wraps cipher in code block' do
+        expect_to_create_issue_with(
+          text: "\nbc. SSLCipherSuite RC4-SHA:HIGH:!ADH"
+        )
+
+        @importer.import(file: 'spec/fixtures/files/with_ciphers.xml')
+      end
+    end
+
+    def expect_to_create_issue_with(text:)
+      expect(@content_service).to receive(:create_issue) do |args|
+        expect(args[:text]).to include text
+        OpenStruct.new(args)
+      end.once
+    end
   end
 end
