@@ -1,6 +1,8 @@
+[v#.#.#] ([month] [YYYY])
+  - Wrap ciphers in code blocks for the Vuln Importer
+
 v4.4.0 (June 2022)
   - Registers template mappings locally
-  - Wrap ciphers in code blocks for the Vuln Importer
 
 v4.3.0 (April 2022)
   - Adds Qualys Asset Scanner (ASSET) support
