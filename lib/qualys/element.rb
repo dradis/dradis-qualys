@@ -93,23 +93,12 @@ module Qualys
       method_name = method.to_s
       return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
 
-      vuln_id = @xml.attributes['number'].to_s
-      # Then we try simple children tags: TITLE, LAST_UPDATE, CVSS_BASE...
       tag = @xml.at_xpath("./#{method_name.upcase}")
-      if tag && !tag.text.blank?
-        if tags_with_html_content.include?(method)
-          result = Qualys::cleanup_html(tag.text)
-          result = add_bc_to_ssl_cipher_list(result) if SSL_CIPHER_VULN_IDS.include?(vuln_id)
-          return result
-        else
-          return tag.text
-        end
-      else
-        'n/a'
-      end
-
       if method_name == 'qualys_collection'
         @xml.name
+      elsif tag && !tag.text.blank?
+        vuln_id = @xml.attributes['number'].to_s
+        cleanup_tag(method, vuln_id, tag.text)
       else
         # nothing found, the tag is valid but not present in this ReportItem
         return nil
@@ -118,14 +107,21 @@ module Qualys
 
     private
 
-    def tags_with_html_content
-      [:consequence, :diagnosis, :solution]
-    end
-
     def add_bc_to_ssl_cipher_list(source)
       result = source
       result.gsub!(/^(.*?):!(.*?)$/) { "\nbc. #{$1}:!#{$2}\n" }
       result
+    end
+
+    def cleanup_tag(method, vuln_id, text)
+      result = text
+      result = Qualys::cleanup_html(result) if tags_with_html_content.include?(method)
+      result = add_bc_to_ssl_cipher_list(result) if SSL_CIPHER_VULN_IDS.include?(vuln_id)
+      result
+    end
+
+    def tags_with_html_content
+      [:consequence, :diagnosis, :solution]
     end
   end
 end
