@@ -1,4 +1,4 @@
-[v#.#.#] ([month] [YYYY])
+v4.5.0 (August 2022)
   - Wrap ciphers in code blocks for the Vuln Importer
 
 v4.4.0 (June 2022)
