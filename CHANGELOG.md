@@ -1,3 +1,6 @@
+[v#.#.#] ([month] [YYYY])
+  - Adds Request/Response Evidence fields for Web Application Scans (WAS)
+
 v4.8.0 (April 2023)
   - No changes
 
