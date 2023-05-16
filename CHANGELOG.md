@@ -1,5 +1,19 @@
 [v#.#.#] ([month] [YYYY])
   - Adds Request/Response Evidence fields for Web Application Scans (WAS)
+
+v4.8.0 (April 2023)
+  - No changes
+
+v4.7.0 (February 2023)
+  - No changes
+
+v4.6.0 (November 2022)
+  - No changes
+
+v4.5.0 (August 2022)
+  - Wrap ciphers in code blocks for the Vuln Importer
+
+v4.4.0 (June 2022)
   - Registers template mappings locally
 
 v4.3.0 (April 2022)
