@@ -51,7 +51,13 @@ module Dradis::Plugins::Qualys
           process_issue(xml_qid)
         end
 
-        doc.xpath('WAS_SCAN_REPORT/RESULTS//VULNERABILITY_LIST/VULNERABILITY').each do |xml_vulnerability|
+        vulnerability_list =
+          doc.xpath(
+            'WAS_SCAN_REPORT/RESULTS/VULNERABILITY_LIST/VULNERABILITY | ' +
+            'WAS_SCAN_REPORT/RESULTS/WEB_APPLICATION/VULNERABILITY_LIST/VULNERABILITY'
+          )
+
+        vulnerability_list.each do |xml_vulnerability|
           process_evidence(xml_vulnerability)
         end
 

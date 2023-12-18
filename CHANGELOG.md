@@ -1,5 +1,5 @@
 v4.11.0 (Month 2023)
-  - Add support for the updated WAS format
+  - Add support for the output for Qualys WAS API 3.13 and later
 
 v4.10.0 (September 2023)
   - Update gemspec links
