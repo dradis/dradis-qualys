@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ostruct'
 
 module Dradis::Plugins
-  describe 'Qualys upload plugin' do
+  shared_examples 'Qualys upload plugin' do
     before(:each) do
       # Stub template service
       templates_dir = File.expand_path('../../../../templates', __FILE__)
@@ -16,7 +16,6 @@ module Dradis::Plugins
       )
     end
 
-    let(:example_xml) { 'spec/fixtures/files/simple_was.xml' }
     let(:run_import!) { @importer.import(file: example_xml) }
 
     it 'creates nodes as needed' do
@@ -37,5 +36,17 @@ module Dradis::Plugins
       )
       run_import!
     end
+  end
+
+  context 'Simple WAS template' do
+    let(:example_xml) { 'spec/fixtures/files/simple_was.xml' }
+
+    include_examples 'Qualys upload plugin'
+  end
+
+  context 'WAS template with WEB_APPLICATION' do
+    let(:example_xml) { 'spec/fixtures/files/simple_was_updated.xml' }
+
+    include_examples 'Qualys upload plugin'
   end
 end

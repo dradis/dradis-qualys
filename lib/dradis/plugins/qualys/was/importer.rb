@@ -1,5 +1,4 @@
 module Dradis::Plugins::Qualys
-
   # This module knows how to parse Qualys Web Application Scanner format.
   module WAS
     def self.meta
@@ -17,17 +16,17 @@ module Dradis::Plugins::Qualys
         { evidence: 'was-evidence', issue: 'was-issue' }
       end
 
-      def initialize(args={})
+      def initialize(args = {})
         args[:plugin] = Dradis::Plugins::Qualys
         super(args)
 
         @issue_lookup = {}
       end
 
-      def import(params={})
+      def import(params = {})
         file_content = File.read(params[:file])
 
-        logger.info { 'Parsing Qualys WAS XML output file...'}
+        logger.info { 'Parsing Qualys WAS XML output file...' }
         doc = Nokogiri::XML(file_content)
         logger.info { 'Done.' }
 
@@ -38,20 +37,27 @@ module Dradis::Plugins::Qualys
           return false
         end
 
-        logger.info { 'Global Summary information'}
+        logger.info { 'Global Summary information' }
 
         xml_global_summary = doc.at_xpath('WAS_SCAN_REPORT/SUMMARY/GLOBAL_SUMMARY')
         logger.info { 'Security Risk: ' + xml_global_summary.at_xpath('./SECURITY_RISK').text }
         logger.info { 'Vulnerabilities found: ' + xml_global_summary.at_xpath('./VULNERABILITY').text }
 
-        xml_webapp = doc.at_xpath('WAS_SCAN_REPORT/APPENDIX/WEBAPP')
+        xml_webapp =
+          doc.at_xpath('WAS_SCAN_REPORT/APPENDIX/WEBAPP | WAS_SCAN_REPORT/APPENDIX/WEB_APPLICATION')
         process_webapp(xml_webapp)
 
         doc.xpath('WAS_SCAN_REPORT/GLOSSARY/QID_LIST/QID').each do |xml_qid|
           process_issue(xml_qid)
         end
 
-        doc.xpath('WAS_SCAN_REPORT/RESULTS/VULNERABILITY_LIST/VULNERABILITY').each do |xml_vulnerability|
+        vulnerability_list =
+          doc.xpath(
+            'WAS_SCAN_REPORT/RESULTS/VULNERABILITY_LIST/VULNERABILITY | ' +
+            'WAS_SCAN_REPORT/RESULTS/WEB_APPLICATION/VULNERABILITY_LIST/VULNERABILITY'
+          )
+
+        vulnerability_list.each do |xml_vulnerability|
           process_evidence(xml_vulnerability)
         end
 
@@ -68,11 +74,11 @@ module Dradis::Plugins::Qualys
         if issue
           issue_id = issue.respond_to?(:id) ? issue.id : issue.to_issue.id
 
-          logger.info{ "\t => Creating new evidence (plugin_id: #{id})" }
-          logger.info{ "\t\t => Issue: #{issue.title} (plugin_id: #{issue_id})" }
-          logger.info{ "\t\t => Node: #{webapp_node.label} (#{webapp_node.id})" }
+          logger.info { "\t => Creating new evidence (plugin_id: #{id})" }
+          logger.info { "\t\t => Issue: #{issue.title} (plugin_id: #{issue_id})" }
+          logger.info { "\t\t => Node: #{webapp_node.label} (#{webapp_node.id})" }
         else
-          logger.info{ "\t => Couldn't find QID for evidence with ID=#{id}" }
+          logger.info { "\t => Couldn't find QID for evidence with ID=#{id}" }
           return
         end
 
@@ -82,7 +88,7 @@ module Dradis::Plugins::Qualys
 
       def process_issue(xml_qid)
         qid = xml_qid.at_xpath('QID').text
-        logger.info{ "\t => Creating new issue (plugin_id: #{ qid })" }
+        logger.info { "\t => Creating new issue (plugin_id: #{ qid })" }
         issue_text = template_service.process_template(template: 'was-issue', data: xml_qid)
         issue = content_service.create_issue(text: issue_text, id: qid)
 
