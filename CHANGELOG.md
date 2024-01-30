@@ -1,3 +1,6 @@
+v4.12.0 (XXXX 2024)
+  - Update Dradis links in README
+
 v4.11.0 (January 2023)
   - Add support for the output for Qualys WAS API 3.13 and later
 
