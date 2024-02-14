@@ -1,5 +1,5 @@
 module Dradis::Plugins::Qualys
-  class MappingService
+  module Mapping
     def default_mapping
       {
         'asset-evidence' => {
