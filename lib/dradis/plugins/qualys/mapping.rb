@@ -1,6 +1,6 @@
 module Dradis::Plugins::Qualys
   module Mapping
-    def default_mapping
+    def self.default_mapping
       {
         'asset-evidence' => {
           'Result' => '{{ qualys[asset-evidence.result] }}',
