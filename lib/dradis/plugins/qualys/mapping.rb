@@ -63,5 +63,20 @@ module Dradis::Plugins::Qualys
         }
       }
     end
+
+    # since renaming template files to use a consistent structure,
+    # we need a reference to the old names in order to migrate the
+    # .template files to mapping records in the db
+    # { new_template_name => old_template_name }
+    def self.legacy_mapping_reference
+      {
+        'asset_evidence' => 'asset-evidence',
+        'asset_issue' => 'asset-issue',
+        'vuln_evidence' => 'evidence',
+        'vuln_element' => 'element',
+        'was_evidence' => 'was-evidence',
+        'was_issue' => 'was-issue'
+      }
+    end
   end
 end
