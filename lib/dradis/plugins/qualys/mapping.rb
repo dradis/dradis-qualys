@@ -1,5 +1,10 @@
 module Dradis::Plugins::Qualys
   module Mapping
+    # source of truth for the mapping component name
+    def self.component_name
+      'qualys'
+    end
+
     def self.default_mapping
       {
         'asset-evidence' => {
