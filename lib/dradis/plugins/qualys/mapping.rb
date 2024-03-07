@@ -2,13 +2,13 @@ module Dradis::Plugins::Qualys
   module Mapping
     def self.default_mapping
       {
-        'asset-evidence' => {
+        'asset_evidence' => {
           'Result' => '{{ qualys[asset-evidence.result] }}',
           'Status' => '{{ qualys[asset-evidence.vuln_status] }}',
           'SSL' => '{{ qualys[asset-evidence.ssl] }}',
           'CVSSv3.Final' => '{{ qualys[asset-evidence.cvss_final] }}'
         },
-        'asset-issue' => {
+        'asset_issue' => {
           'Title' => '{{ qualys[asset-issue.title] }}',
           'Severity' => '{{ qualys[asset-issue.severity] }}',
           'Categories' => 'Category: {{ qualys[asset-issue.category] }}',
@@ -18,7 +18,7 @@ module Dradis::Plugins::Qualys
           'Impact' => '{{ qualys[asset-issue.impact] }}',
           'Solution' => '{{ qualys[asset-issue.solution] }}'
         },
-        'element' => {
+        'vuln_element' => {
           'Title' => '{{ qualys[element.title] }}',
           'Severity' => '{{ qualys[element.severity] }}',
           'CVE' => '{{ qualys[element.cveid] }}',
@@ -31,13 +31,13 @@ module Dradis::Plugins::Qualys
           'CVEList' => '{{ qualys[element.cve_id_list] }}',
           'QualysCollection' => '{{ qualys[element.qualys_collection] }}'
         },
-        'evidence' => {
+        'vuln_evidence' => {
           'Category' => '{{ qualys[evidence.cat_value] }}',
           'Protocol' => '{{ qualys[evidence.cat_protocol] }}',
           'Port' => '{{ qualys[evidence.cat_port] }}',
           'Output' => '{{ qualys[evidence.result] }}'
         },
-        'was-evidence' => {
+        'was_evidence' => {
           'Location' => '{{ qualys[was-evidence.url] }}',
           'Output' => "*Request*\n\n
                       Method: {{ qualys[was-evidence.request_method] }}\n
@@ -47,7 +47,7 @@ module Dradis::Plugins::Qualys
                       Evidence: {{ qualys[was-evidence.response_evidence] }}\n\n
                       bc.. {{ qualys[was-evidence.response_contents] }}"
         },
-        'was-issue' => {
+        'was_issue' => {
           'Title' => '{{ qualys[was-issue.title] }}',
           'Severity' => '{{ qualys[was-issue.severity] }}',
           'Categories' => "Category: {{ qualys[was-issue.category] }}\n
