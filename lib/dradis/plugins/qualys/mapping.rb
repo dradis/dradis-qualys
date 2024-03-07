@@ -57,8 +57,8 @@ module Dradis::Plugins::Qualys
           'CVSSv3.Vector' => '{{ qualys[was-issue.cvss3_vector] }}',
           'CVSSv3.BaseScore' => '{{ qualys[was-issue.cvss3_base] }}',
           'CVSSv3.TemporalScore' => '{{ qualys[was-issue.cvss3_temporal] }}',
-          'Description' => '{{ qualys[was-issue.description] }}',
-          'Impact' => '{{ qualys[was-issue.impact] }}',
+          'Description' => "{{ qualys[was-issue.description] }}\n\n
+                            {{ qualys[was-issue.impact] }}",
           'Solution' => '{{ qualys[was-issue.solution] }}'
         }
       }
