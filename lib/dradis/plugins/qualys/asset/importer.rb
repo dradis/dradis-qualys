@@ -13,7 +13,7 @@ module Dradis::Plugins::Qualys
 
     class Importer < Dradis::Plugins::Upload::Importer
       def self.templates
-        { evidence: 'asset-evidence', issue: 'asset-issue' }
+        { evidence: 'asset_evidence', issue: 'asset_issue' }
       end
 
       def initialize(args={})
@@ -86,7 +86,7 @@ module Dradis::Plugins::Qualys
       def process_issue(xml_vuln)
         qid = xml_vuln.at_xpath('QID').text
         logger.info { "\t => Creating new issue (plugin_id: #{ qid })" }
-        issue_text = mapping_service.apply_mapping(source: 'asset-issue', data: xml_vuln)
+        issue_text = mapping_service.apply_mapping(source: 'asset_issue', data: xml_vuln)
         issue = content_service.create_issue(text: issue_text, id: qid)
 
         issue_lookup[qid.to_i] = issue
@@ -107,7 +107,7 @@ module Dradis::Plugins::Qualys
           return
         end
 
-        evidence_content = mapping_service.apply_mapping(source: 'asset-evidence', data: xml_evidence)
+        evidence_content = mapping_service.apply_mapping(source: 'asset_evidence', data: xml_evidence)
         content_service.create_evidence(issue: issue, node: node, content: evidence_content)
       end
     end
