@@ -7,6 +7,7 @@ end
 
 require 'dradis/plugins/qualys/engine'
 require 'dradis/plugins/qualys/field_processor'
+require 'dradis/plugins/qualys/mapping'
 require 'dradis/plugins/qualys/version'
 
 require 'dradis/plugins/qualys/asset/importer'
