@@ -13,7 +13,7 @@ module Dradis::Plugins::Qualys
 
     class Importer < Dradis::Plugins::Upload::Importer
       def self.templates
-        { evidence: 'was-evidence', issue: 'was-issue' }
+        { evidence: 'was_evidence', issue: 'was_issue' }
       end
 
       def initialize(args = {})
@@ -82,14 +82,14 @@ module Dradis::Plugins::Qualys
           return
         end
 
-        evidence_content = template_service.process_template(template: 'was-evidence', data: xml_vulnerability)
+        evidence_content = template_service.process_template(template: 'was_evidence', data: xml_vulnerability)
         content_service.create_evidence(issue: issue, node: webapp_node, content: evidence_content)
       end
 
       def process_issue(xml_qid)
         qid = xml_qid.at_xpath('QID').text
         logger.info { "\t => Creating new issue (plugin_id: #{ qid })" }
-        issue_text = template_service.process_template(template: 'was-issue', data: xml_qid)
+        issue_text = template_service.process_template(template: 'was_issue', data: xml_qid)
         issue = content_service.create_issue(text: issue_text, id: qid)
 
         issue_lookup[qid.to_i] = issue
