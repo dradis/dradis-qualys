@@ -61,5 +61,93 @@ module Dradis::Plugins::Qualys
         'Solution' => '{{ qualys[was-issue.solution] }}'
       }
     }.freeze
+
+    SOURCE_FIELDS = {
+      asset_evidence: [
+        'asset-evidence.cvss3_final',
+        'asset-evidence.cvss_final',
+        'asset-evidence.first_found',
+        'asset-evidence.last_found',
+        'asset-evidence.result',
+        'asset-evidence.ssl',
+        'asset-evidence.times_found',
+        'asset-evidence.type',
+        'asset-evidence.vuln_status'
+      ],
+      asset_issue: [
+        'asset-issue.category',
+        'asset-issue.cvss3_base',
+        'asset-issue.cvss3_temporal',
+        'asset-issue.cvss_base',
+        'asset-issue.cvss_temporal',
+        'asset-issue.impact',
+        'asset-issue.last_update',
+        'asset-issue.pci_flag',
+        'asset-issue.qid',
+        'asset-issue.result',
+        'asset-issue.severity',
+        'asset-issue.solution',
+        'asset-issue.threat',
+        'asset-issue.title'
+      ],
+      vuln_element: [
+        'element.number',
+        'element.severity',
+        'element.cveid',
+        'element.title',
+        'element.last_update',
+        'element.cvss_base',
+        'element.cvss_temporal',
+        'element.pci_flag',
+        'element.vendor_reference_list',
+        'element.cve_id_list',
+        'element.bugtraq_id_list',
+        'element.diagnosis',
+        'element.consequence',
+        'element.solution',
+        'element.compliance',
+        'element.result',
+        'element.qualys_collection'
+      ],
+      vuln_evidence: [
+        'evidence.cat_fqdn',
+        'evidence.cat_misc',
+        'evidence.cat_port',
+        'evidence.cat_protocol',
+        'evidence.cat_value',
+        'evidence.result'
+      ],
+      was_evidence: [
+        'was-evidence.access_paths',
+        'was-evidence.ajax',
+        'was-evidence.authentication',
+        'was-evidence.ignored',
+        'was-evidence.potential',
+        'was-evidence.request_headers',
+        'was-evidence.request_method',
+        'was-evidence.request_url',
+        'was-evidence.response_contents',
+        'was-evidence.response_evidence',
+        'was-evidence.url'
+      ],
+      was_issue: [
+        'was-issue.category',
+        'was-issue.cvss_base',
+        'was-issue.cvss_temporal',
+        'was-issue.cvss3_base',
+        'was-issue.cvss3_temporal',
+        'was-issue.cvss3_vector',
+        'was-issue.cwe',
+        'was-issue.description',
+        'was-issue.group',
+        'was-issue.impact',
+        'was-issue.owasp',
+        'was-issue.qid',
+        'was-issue.severity',
+        'was-issue.solution',
+        'was-issue.title',
+        'was-issue.wasc'
+      ]
+    }.freeze
   end
 end
