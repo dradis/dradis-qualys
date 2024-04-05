@@ -95,11 +95,11 @@ module Dradis::Plugins::Qualys
       # Issue and Evidence template out of it.
       def process_vuln(vuln_number, xml_cat)
         logger.info{ "\t\t => Creating new issue (plugin_id: #{ vuln_number })" }
-        issue_text = template_service.process_template(template: 'vuln_element', data: xml_cat)
+        issue_text = mapping_service.apply_mapping(source: 'vuln_element', data: xml_cat)
         issue = content_service.create_issue(text: issue_text, id: vuln_number)
 
         logger.info{ "\t\t => Creating new evidence" }
-        evidence_content = template_service.process_template(template: 'vuln_evidence', data: xml_cat)
+        evidence_content = mapping_service.apply_mapping(source: 'vuln_evidence', data: xml_cat)
         content_service.create_evidence(issue: issue, node: self.host_node, content: evidence_content)
       end
     end
