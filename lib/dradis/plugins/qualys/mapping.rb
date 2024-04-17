@@ -21,8 +21,7 @@ module Dradis::Plugins::Qualys
         'Title' => '{{ qualys[element.title] }}',
         'Severity' => '{{ qualys[element.severity] }}',
         'CVE' => '{{ qualys[element.cveid] }}',
-        'CVSS' => "Base: {{ qualys[element.cvss_base] }}\n
-                  Temporal: {{ qualys[element.cvss_temporal] }}",
+        'CVSS' => "Base: {{ qualys[element.cvss_base] }}\nTemporal: {{ qualys[element.cvss_temporal] }}",
         'Diagnosis' => '{{ qualys[element.diagnosis] }}',
         'Consequence' => '{{ qualys[element.consequence] }}',
         'Solution' => '{{ qualys[element.solution] }}',
@@ -38,26 +37,16 @@ module Dradis::Plugins::Qualys
       },
       was_evidence: {
         'Location' => '{{ qualys[was-evidence.url] }}',
-        'Output' => "*Request*\n\n
-                    Method: {{ qualys[was-evidence.request_method] }}\n
-                    URL: {{ qualys[was-evidence.request_url] }}\n\n
-                    bc.. {{ qualys[was-evidence.request_headers] }}\n\n
-                    p. *Response*\n\n
-                    Evidence: {{ qualys[was-evidence.response_evidence] }}\n\n
-                    bc.. {{ qualys[was-evidence.response_contents] }}"
+        'Output' => "*Request*\n\nMethod: {{ qualys[was-evidence.request_method] }}\nURL: {{ qualys[was-evidence.request_url] }}\n\nbc.. {{ qualys[was-evidence.request_headers] }}\n\np. *Response*\n\nEvidence: {{ qualys[was-evidence.response_evidence] }}\n\nbc.. {{ qualys[was-evidence.response_contents] }}"
       },
       was_issue: {
         'Title' => '{{ qualys[was-issue.title] }}',
         'Severity' => '{{ qualys[was-issue.severity] }}',
-        'Categories' => "Category: {{ qualys[was-issue.category] }}\n
-                        Group: {{ qualys[was-issue.group] }}\n
-                        OWASP: {{ qualys[was-issue.owasp] }}\n
-                        CWE: {{ qualys[was-issue.cwe] }}",
+        'Categories' => "Category: {{ qualys[was-issue.category] }}\nGroup: {{ qualys[was-issue.group] }}\nOWASP: {{ qualys[was-issue.owasp] }}\nCWE: {{ qualys[was-issue.cwe] }}",
         'CVSSv3.Vector' => '{{ qualys[was-issue.cvss3_vector] }}',
         'CVSSv3.BaseScore' => '{{ qualys[was-issue.cvss3_base] }}',
         'CVSSv3.TemporalScore' => '{{ qualys[was-issue.cvss3_temporal] }}',
-        'Description' => "{{ qualys[was-issue.description] }}\n\n
-                          {{ qualys[was-issue.impact] }}",
+        'Description' => "{{ qualys[was-issue.description] }}\n\n{{ qualys[was-issue.impact] }}",
         'Solution' => '{{ qualys[was-issue.solution] }}'
       }
     }.freeze
