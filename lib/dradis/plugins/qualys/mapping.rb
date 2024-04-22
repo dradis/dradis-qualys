@@ -19,20 +19,15 @@ module Dradis::Plugins::Qualys
       },
       vuln_element: {
         'Title' => '{{ qualys[element.title] }}',
-        'Severity' => '{{ qualys[element.severity] }}',
-        'CVE' => '{{ qualys[element.cveid] }}',
-        'CVSS' => "Base: {{ qualys[element.cvss_base] }}\nTemporal: {{ qualys[element.cvss_temporal] }}",
-        'Diagnosis' => '{{ qualys[element.diagnosis] }}',
-        'Consequence' => '{{ qualys[element.consequence] }}',
+        'CVSSv3.BaseScore' => '{{ qualys[element.cvss_base] }}',
+        'CVSSv3.Vector' => 'Temporal score: {{ qualys[element.cvss_temporal] }}',
+        'Type' => 'External',
+        'Description' => "{{ qualys[element.diagnosis] }}\n{{ qualys[element.consequence] }}",
         'Solution' => '{{ qualys[element.solution] }}',
-        'Result' => '{{ qualys[element.result] }}',
-        'CVEList' => '{{ qualys[element.cve_id_list] }}',
-        'QualysCollection' => '{{ qualys[element.qualys_collection] }}'
+        'References' => '{{ qualys[element.vendor_reference_list] }}',
       },
       vuln_evidence: {
-        'Category' => '{{ qualys[evidence.cat_value] }}',
-        'Protocol' => '{{ qualys[evidence.cat_protocol] }}',
-        'Port' => '{{ qualys[evidence.cat_port] }}',
+        'Location' => "{{ qualys[evidence.cat_protocol] }}/{{ qualys[evidence.cat_port] }}",
         'Output' => '{{ qualys[evidence.result] }}'
       },
       was_evidence: {
