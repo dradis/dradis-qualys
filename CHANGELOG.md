@@ -1,4 +1,7 @@
-v4.12.0 (XXXX 2024)
+v4.13.0 (XXXX 2024)
+  - Add `cvss3_base`, `cvss3_temporal`, and `cvss3_version` as available vuln fields
+
+v4.12.0 (May 2024)
   - Migrate integration to use Mappings Manager
   - Update Dradis links in README
   - Update template names to include uploader

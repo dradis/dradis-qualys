@@ -46,8 +46,8 @@ module Qualys
         :number, :severity, :cveid,
 
         # simple tags
-        :title, :last_update, :cvss_base, :cvss_temporal, :pci_flag, :diagnosis,
-        :consequence, :solution, :compliance, :result,
+        :title, :last_update, :cvss3_base, :cvss3_temporal, :cvss3_version, :cvss_base,
+        :cvss_temporal, :pci_flag, :diagnosis, :consequence, :solution, :compliance, :result,
 
         # multiple tags
         :vendor_reference_list, :cve_id_list, :bugtraq_id_list,
