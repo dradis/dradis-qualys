@@ -61,6 +61,7 @@ module Dradis::Plugins::Qualys
           process_evidence(xml_vulnerability)
         end
 
+        logger.info { 'Qualys WAS file successfully imported' }
         true
       end
 
