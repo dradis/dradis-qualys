@@ -48,6 +48,7 @@ module Dradis::Plugins::Qualys
           process_node(xml_node)
         end
 
+        logger.info { 'Qualys Asset file successfully imported' }
         true
       end
 

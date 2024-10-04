@@ -43,6 +43,7 @@ module Dradis::Plugins::Qualys
           process_ip(xml_host)
         end
 
+        logger.info { 'Qualys Vuln file successfully imported' }
         return true
       end
 
