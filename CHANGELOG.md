@@ -1,3 +1,6 @@
+v4.14.0 (October 2024)
+  - No changes
+
 vX.XX.X (Month 2024)
   - Update thor task names for consistency
 
