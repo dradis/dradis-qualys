@@ -1,7 +1,7 @@
-v4.14.0 (October 2024)
-  - No changes
+vX.XX.X (XXXX 2024)
+  - Add `cvss3_base`, `cvss3_temporal`, and `cvss3_version` as available vuln fields
 
-vX.XX.X (Month 2024)
+v4.14.0 (October 2024)
   - Update thor task names for consistency
 
 v4.13.0 (July 2024)
