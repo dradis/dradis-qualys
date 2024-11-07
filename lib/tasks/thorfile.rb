@@ -1,10 +1,10 @@
 class QualysTasks < Thor
   include Rails.application.config.dradis.thor_helper_module
 
-  namespace "dradis:plugins:qualys"
+  namespace "dradis:plugins:qualys:upload"
 
-  desc "upload FILE", "upload Qualys XML results"
-  def upload(file_path)
+  desc "vuln FILE", "upload Qualys Vuln XML results"
+  def vuln(file_path)
     require 'config/environment'
 
     unless File.exists?(file_path)
@@ -18,8 +18,8 @@ class QualysTasks < Thor
     importer.import(file: file_path)
   end
 
-  desc "upload_was FILE", "upload Qualys WAS XML results"
-  def upload_was(file_path)
+  desc "was FILE", "upload Qualys WAS XML results"
+  def was(file_path)
     require 'config/environment'
 
     unless File.exists?(file_path)
