@@ -1,4 +1,4 @@
-vX.XX.X (XXXX 2024)
+v4.15.0 (December 2024)
   - Add `cvss3_base`, `cvss3_temporal`, and `cvss3_version` as available vuln fields
 
 v4.14.0 (October 2024)
