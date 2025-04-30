@@ -3,6 +3,10 @@ class QualysTasks < Thor
 
   namespace "dradis:plugins:qualys:upload"
 
+  class_option :state,
+    type: :string,
+    desc: 'The state your issues will be created with. If not provided, the scope will be draft'
+
   desc "vuln FILE", "upload Qualys Vuln XML results"
   def vuln(file_path)
     require 'config/environment'
