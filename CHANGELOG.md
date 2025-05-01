@@ -1,3 +1,6 @@
+v4.16.0 (May 2025)
+  - No changes
+
 v4.15.0 (December 2024)
   - Add `cvss3_base`, `cvss3_temporal`, and `cvss3_version` as available vuln fields
 
