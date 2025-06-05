@@ -14,6 +14,9 @@ module Qualys
     result.gsub!(/<b>(.*?)<\/b>/i) { "*#{$1.strip}*" }
     result.gsub!(/<b>|<\/b>/i, "")
     result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
+    
+    result.gsub!(/<li>(.*?)<\/li>/i) { "* #{$1.strip}" }
+    result.gsub!(/<ul>|<\/ul>/i, "")
 
     result.gsub!(/<dl>|<\/dl>/i, "\n")
     result.gsub!(/<dt>(.*?)<\/dt>/i) { "* #{$1.strip}" }

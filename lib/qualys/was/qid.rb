@@ -79,7 +79,7 @@ module Qualys::WAS
 
     private
     def tags_with_html_content
-      [:description, :impact, :solution]
+      %w[description impact solution]
     end
   end
 end
