@@ -16,7 +16,7 @@ module Qualys
     result.gsub!(/<i>(.*?)<\/i>/i) { "_#{$1.strip}_" }
     
     result.gsub!(/<li>(.*?)<\/li>/i) { "* #{$1.strip}" }
-    result.gsub!(/<ul>|<\/ul>/i, "")
+    result.gsub!(/<ul>|<\/ul>|<ol>|<\/ol>/i, "")
 
     result.gsub!(/<dl>|<\/dl>/i, "\n")
     result.gsub!(/<dt>(.*?)<\/dt>/i) { "* #{$1.strip}" }
@@ -124,7 +124,7 @@ module Qualys
     end
 
     def tags_with_html_content
-      [:consequence, :diagnosis, :solution]
+      %w[consequence diagnosis solution]
     end
   end
 end
