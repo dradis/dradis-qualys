@@ -1,6 +1,12 @@
 v4.XX.XX (XXXX 2025)
   - Clean up HTML tags including unordered lists in WAS scans
 
+v4.18.0 (September 2025)
+  - No changes
+
+v4.17.0 (July 2025)
+  - No changes
+
 v4.16.1 (May 2025)
   - No changes
 
