@@ -1,5 +1,5 @@
 v4.XX.XX (XXXX 2025)
-  - Clean up HTML tags including unordered lists in WAS scans
+  - Parse HTML tags correctly including unordered lists in WAS scans
 
 v4.18.0 (September 2025)
   - No changes
