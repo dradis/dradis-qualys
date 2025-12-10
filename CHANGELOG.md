@@ -1,5 +1,5 @@
 v4.XX.XX (XXXX 2025)
-  - Parse HTML tags correctly including unordered lists in WAS scans
+ - Remove HTML tags when importing WAS scans
 
 v4.18.0 (September 2025)
   - No changes
