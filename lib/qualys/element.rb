@@ -124,7 +124,7 @@ module Qualys
     end
 
     def tags_with_html_content
-      %w[consequence diagnosis solution]
+      [:consequence, :diagnosis, :solution]
     end
   end
 end
