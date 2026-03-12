@@ -1,4 +1,4 @@
-v4.XX.XX (XXXX 2025)
+v5.0.0 (March 2025)
  - Remove HTML tags when importing WAS scans
 
 v4.19.0 (November 2025)
