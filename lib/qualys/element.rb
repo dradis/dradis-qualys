@@ -99,9 +99,7 @@ module Qualys
       method_name = method.to_s
       return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
 
-      if method == :exploitability
-        return process_exploitability
-      end
+      return exploitability_list if method == :exploitability
 
       tag = @xml.at_xpath("./#{method_name.upcase}")
       if method_name == 'qualys_collection'
@@ -134,7 +132,7 @@ module Qualys
       [:consequence, :diagnosis, :solution]
     end
 
-    def process_exploitability
+    def exploitability_list
       src_nodes = @xml.xpath('./CORRELATION/EXPLOITABILITY/EXPLT_SRC')
       return nil if src_nodes.empty?
 
