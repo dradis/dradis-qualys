@@ -25,6 +25,7 @@ module Dradis::Plugins::Qualys
         'Description' => "{{ qualys[element.diagnosis] }}\n{{ qualys[element.consequence] }}",
         'Solution' => '{{ qualys[element.solution] }}',
         'References' => '{{ qualys[element.vendor_reference_list] }}',
+        'Exploitability' => '{{ qualys[element.exploitability] }}',
       },
       vuln_evidence: {
         'Location' => "{{ qualys[evidence.cat_protocol] }}/{{ qualys[evidence.cat_port] }}",
@@ -88,6 +89,7 @@ module Dradis::Plugins::Qualys
         'element.pci_flag',
         'element.vendor_reference_list',
         'element.cve_id_list',
+        'element.exploitability',
         'element.bugtraq_id_list',
         'element.diagnosis',
         'element.consequence',

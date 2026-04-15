@@ -1,3 +1,6 @@
+v5.XX.XX (XXXX 2026)
+  - Add `exploitability` as an available vuln field
+
 v5.0.0 (March 2025)
  - Remove HTML tags when importing WAS scans
 
