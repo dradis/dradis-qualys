@@ -55,6 +55,9 @@ module Qualys
         # multiple tags
         :vendor_reference_list, :cve_id_list, :bugtraq_id_list,
 
+        # correlation tags
+        :exploitability,
+
         # category
         :qualys_collection
       ]
@@ -96,6 +99,10 @@ module Qualys
       method_name = method.to_s
       return @xml.attributes[method_name].value if @xml.attributes.key?(method_name)
 
+      if method == :exploitability
+        return process_exploitability
+      end
+
       tag = @xml.at_xpath("./#{method_name.upcase}")
       if method_name == 'qualys_collection'
         @xml.name
@@ -125,6 +132,25 @@ module Qualys
 
     def tags_with_html_content
       [:consequence, :diagnosis, :solution]
+    end
+
+    def process_exploitability
+      src_nodes = @xml.xpath('./CORRELATION/EXPLOITABILITY/EXPLT_SRC')
+      return nil if src_nodes.empty?
+
+      blocks = src_nodes.map do |src|
+        lines = [src.at_xpath('./SRC_NAME')&.text]
+
+        src.xpath('./EXPLT_LIST/EXPLT').each do |explt|
+          lines << explt.at_xpath('./REF')&.text
+          lines << explt.at_xpath('./DESC')&.text
+          lines << explt.at_xpath('./LINK')&.text
+        end
+
+        lines.compact.join("\n")
+      end
+
+      blocks.reject(&:blank?).join("\n\n").presence
     end
   end
 end
