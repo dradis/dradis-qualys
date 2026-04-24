@@ -6,8 +6,18 @@ module Dradis::Plugins::Qualys
     description 'Processes Qualys output'
     provides :upload
 
+    initializer 'qualys.asset_paths' do |app|
+      app.config.assets.paths << root.join('app/javascript')
+      app.config.assets.precompile += %w[
+        dradis/plugins/qualys/upload_detectors/asset.js
+        dradis/plugins/qualys/upload_detectors/vuln.js
+        dradis/plugins/qualys/upload_detectors/was.js
+      ]
+    end
+
     initializer 'qualys.importmap', before: 'importmap' do |app|
-      app.config.importmap.draw(root.join('config/importmap.rb'))
+      app.config.importmap.paths << root.join('config/importmap.rb')
+      app.config.importmap.cache_sweepers << root.join('app/javascript')
     end
 
     # Because this plugin provides two export modules, we have to overwrite
