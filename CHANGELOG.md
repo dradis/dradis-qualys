@@ -1,3 +1,6 @@
+v5.1.0 (May 2026)
+  - No changes
+
 v5.0.0 (March 2025)
  - Remove HTML tags when importing WAS scans
 
